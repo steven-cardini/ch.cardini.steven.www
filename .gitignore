@@ -1,0 +1,14 @@
+.DS_Store
+Thumbs.db
+**/vendor/
+**/tmp/
+*.log
+*.psd
+*.docx
+*.zip
+*.pdf
+*.config.php
+/bower_components
+/node_modules
+/doc/
+
