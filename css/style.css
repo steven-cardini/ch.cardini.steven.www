@@ -142,18 +142,20 @@ fieldset[disabled] .btn-xl.active {
   background-color: #ffffff;
 }
 .navbar-custom {
-  background-color: #222222;
+  background-color: #333333;
   border-color: transparent;
 }
 .navbar-custom .navbar-brand {
-  color: #006699;
-  font-family: "Kaushan Script", "Helvetica Neue", Helvetica, Arial, cursive;
+  color: #00aaff;
+  text-shadow: -2px 0 #333333, 0 3px #333333, 3px 0 #333333, 0 -2px #333333;
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
 }
 .navbar-custom .navbar-brand:hover,
 .navbar-custom .navbar-brand:focus,
 .navbar-custom .navbar-brand:active,
 .navbar-custom .navbar-brand.active {
-  color: #004466;
+  color: #00aaff;
 }
 .navbar-custom .navbar-collapse {
   border-color: rgba(255, 255, 255, 0.02);
@@ -190,7 +192,7 @@ fieldset[disabled] .btn-xl.active {
 .navbar-custom .navbar-nav > .active > a:hover,
 .navbar-custom .navbar-nav > .active > a:focus {
   color: white;
-  background-color: #004466;
+  background-color: #006699;
 }
 @media (min-width: 768px) {
   .navbar-custom {
@@ -213,7 +215,7 @@ fieldset[disabled] .btn-xl.active {
 }
 @media (min-width: 768px) {
   .navbar-custom.affix {
-    background-color: #222222;
+    background-color: #333333;
     padding: 10px 0;
   }
   .navbar-custom.affix .navbar-brand {
