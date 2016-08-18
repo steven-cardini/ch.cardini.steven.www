@@ -19,9 +19,10 @@ if (isset($api_call)) { // TODO
 }
 
 // RES subfolders
-define ("IMG_DIR", RES_DIR."img/");
 define ("CSS_DIR", RES_DIR."css/");
+define ("IMG_DIR", RES_DIR."img/");
 define ("JS_DIR", RES_DIR."js/");
+define ("JSON_DIR", RES_DIR."json/");
 define ("PHP_DIR", RES_DIR."php/");
 define ("EXT_DIR", RES_DIR."vendor/");
 
