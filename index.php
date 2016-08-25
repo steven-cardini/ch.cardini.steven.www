@@ -6,7 +6,6 @@
   // include classloader and register it to autoloading
   require_once('resources/php/classloader.php');
   spl_autoload_register('loadClass');
-  PhotoHandler::getInstance();
   // start session and save client
   //TODO: require_once('lib/functions/client.register.php');
   // set content language
@@ -108,8 +107,8 @@
             <div class="row">
                 
                 <?php
-                    $photoHandler = PhotoHandler::getInstance();
-                    $photoAlbums = $photoHandler->getAlbums();
+                    $albumCatalog = PhotoAlbumCatalog::getInstance();
+                    $photoAlbums = $albumCatalog->getAlbums();
                     $n = 0;
 
                     foreach ($photoAlbums as $photoAlbum) {

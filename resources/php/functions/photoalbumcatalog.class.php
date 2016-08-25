@@ -1,50 +1,82 @@
 <?php
-class PhotoHandler {
+class PhotoAlbumCatalog {
 
   private static $instance;
-  private static $json_albums = JSON_DIR."photo-albums.json";
-  private static $photoRepository;
+  private static $json = JSON_DIR."photo-albums.json";
 
-  private $albums;
+  private $catalog;
 
   protected function __construct () {
     // initialize photo-albums.json
-    if (!file_exists (static::$json_albums)) {
-      FileFunctions::createFile(static::$json_albums, 
-      '[
-        {
-        "id": "abcdef",
-        "date": "2000-01-01",
-        "title": "dummy-title",
-        "caption": "dummy-caption",
-        "front-photo": "front.png"
-        }
-       ]');
+    if (!file_exists (static::$json)) {
+      $this->initializeJson();
     }
     
-    // initialize $this->albums instance variable
-    $this->albums = [];
-    $array = FileFunctions::jsonToArray(static::$json_albums);
-    foreach ($array as $i => $data) {
-      $this->albums[] = new PhotoAlbum($data);
-    }
-        
+    // initialize $this->albums _instance variable
+    $this->loadAlbums();
   }
-
-  private function __clone() { }
-
-  private function __wakeup() { }
 
   public static function getInstance () {
     if (static::$instance === null) {
-      static::$instance = new PhotoHandler();
+      static::$instance = new PhotoAlbumCatalog();
     }
     return static::$instance;
   }
 
   public function getAlbums() {
-    return $this->albums;
+    return $this->catalog;
   }
+
+  public function addAlbum($date, $title, $caption) {
+    $id = $this->generateId();
+    $created = date('Y-m-d H:i:s');
+    $albumArray = array ("id" => "$id", "date-created" => "$created" , "date-album" => "$date", "title" => "$title", "caption" => "$caption", "front-photo" => "");
+    $album = new PhotoAlbum($albumArray);
+    $this->catalog[] = $album;
+    $this->saveAlbums();
+  }
+
+
+  private function initializeJson() {
+    FileFunctions::createFile(static::$json, 
+      '[
+        {
+        "id": "abcdef10",
+        "date-created": "2016-08-01 12:15:00",
+        "date-album": "2000-01-01",
+        "title": "dummy-title",
+        "caption": "dummy-caption",
+        "front-photo": "front.png"
+        }
+       ]');
+  }
+
+  private function generateId() {
+    $bytes = random_bytes(4);
+    $id = bin2hex($bytes);
+    
+    return $id;
+  }
+
+  private function loadAlbums() {
+    $this->catalog = [];
+    $array = FileFunctions::jsonToArray(static::$json);
+    foreach ($array as $i => $data) {
+      $this->catalog[] = new PhotoAlbum($data);
+    }  
+  }
+
+  private function saveAlbums() {
+    FileFunctions::arrayToJson($this->catalog, static::$json);
+  }
+
+  // Override methods to ensure class is singleton
+  private function __clone() { }
+  private function __wakeup() { }
+
+
+
+
 
 
 

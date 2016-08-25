@@ -88,6 +88,10 @@ class FileFunctions {
     }
   }
 
+  static function createFolder ($path) {
+    mkdir($path, 0777, true);
+  }
+
   static function createFile ($filePath, $content) {
     file_put_contents($filePath, $content);
   }
@@ -99,7 +103,7 @@ class FileFunctions {
   }
 
   static function arrayToJson ($array, $filePath, $append=false) {
-    $string = json_encode($array);
+    $string = json_encode($array, JSON_PRETTY_PRINT);
     if ($append) {
       file_put_contents($filePath, $string, FILE_APPEND);
     } else {

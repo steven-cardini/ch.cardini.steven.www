@@ -1,16 +1,18 @@
 [
     {
-        "id": "af3d5e",
-        "date": "2014-08-23",
-        "title": "hello japan",
-        "caption": "my first trip to japan",
-        "front-photo": "img-34534.jpg"
+        "id": "abcdef10",
+        "date-created": "2016-08-01 12:15:00",
+        "date-album": "2000-01-01",
+        "title": "dummy-title",
+        "caption": "dummy-caption",
+        "front-photo": "front.png"
     },
     {
-        "id": "b7ef10",
-        "date": "2015-09-02",
-        "title": "on the island",
+        "id": "fb820d09",
+        "date-created": "2016-08-25 13:16:27",
+        "date-album": "2015-09-01",
+        "title": "On the island",
         "caption": "a relaxing week in the south",
-        "front-photo": "img-36183.jpg"
+        "front-photo": ""
     }
 ]
