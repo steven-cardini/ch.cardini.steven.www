@@ -37,6 +37,10 @@ class PhotoAlbum implements JsonSerializable {
     $this->loadPhotos();
   }
 
+  public function getId() {
+    return $this->id;
+  }
+
   public function getTitle() {
     return $this->title;
   }
