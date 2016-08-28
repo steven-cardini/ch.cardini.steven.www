@@ -10,6 +10,7 @@ class PhotoAlbum implements JsonSerializable {
 
   private $json;
   private $photoFolder;
+  private $thumbnailFolder;
 
   private $photos;
 
@@ -30,7 +31,13 @@ class PhotoAlbum implements JsonSerializable {
     // initialize photo folder
     $this->photoFolder = IMG_DIR."albums/$this->id/";
     if (!is_dir($this->photoFolder)) {
-      $this->initializeDir();
+      $this->initializeDir($this->photoFolder);
+    }
+
+    // initialize thumbnails folder
+    $this->thumbnailFolder = IMG_DIR."albums/$this->id/thumbs/";
+    if (!is_dir($this->thumbnailFolder)) {
+      $this->initializeDir($this->thumbnailFolder);
     }
 
     // load photos
@@ -57,10 +64,10 @@ class PhotoAlbum implements JsonSerializable {
     return $this->caption;
   }
 
-  public function addPhoto($path, $caption) {
-    
+  public function addPhoto($fileName, $dateCaptured, $caption = "") {
+    $dateAdded = date('Y-m-d H:i:s');
+    $this->setArrayElement ($fileName, $dateAdded, $dateCaptured, $caption);
   }
-
 
 
   public function jsonSerialize() {
@@ -75,27 +82,41 @@ class PhotoAlbum implements JsonSerializable {
   }
 
 
+
+
+
   private function initializeJson() {
     FileFunctions::createFile($this->json, 
-      '[
-        {
-        "file-name": "img-34534.jpg",
-        "date-captured": "2016-03-19",
-        "caption": "dummy-caption"
+      '{
+        "dummy.jpg" {
+          "date-added": "2016-08-28 18:58:39",
+          "date-captured": "2015-03-11 11:12:13",
+          "caption": "dummy-caption"
         }
-       ]');
+       }');
   }
 
-  private function initializeDir() {
-    FileFunctions::createFolder($this->photoFolder);
+  private function initializeDir($dir) {
+    FileFunctions::createFolder($dir);
+  }
+
+  private function setArrayElement ($fileName, $dateAdded, $dateCaptured, $caption = "") {
+    $photoArray = array ("file-name" => "$fileName", "date-added" => "$dateAdded" , "date-captured" => "$dateCaptured", "caption" => "$caption");
+    $photo = new Photo($photoArray);
+    $this->photos[$fileName] = $photo;
+    $this->savePhotos();
   }
 
   private function loadPhotos() {
     $this->photos = [];
     $array = FileFunctions::jsonToArray($this->json);
-    foreach ($array as $i => $data) {
+    foreach ((array) $array as $i => $data) {
       $this->photos[] = new Photo($data);
     }  
+  }
+
+  private function savePhotos() {
+    FileFunctions::arrayToJson($this->photos, $this->json);
   }
     
     

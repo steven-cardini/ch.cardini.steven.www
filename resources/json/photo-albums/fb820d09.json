@@ -1,7 +1,27 @@
-[
-        {
-        "file-name": "img-34534.jpg",
-        "date-captured": "2016-03-19",
-        "caption": "dummy-caption"
-        }
-       ]
+{
+    "20130606-cst-1468.jpg": {
+        "date-added": "2016-08-28 19:08:17",
+        "date-captured": "2013-06-06 19:53:35",
+        "caption": ""
+    },
+    "20141224-cst-2325.jpg": {
+        "date-added": "2016-08-28 19:08:17",
+        "date-captured": "2014-12-24 21:16:40",
+        "caption": ""
+    },
+    "20150825-cst-8078.jpg": {
+        "date-added": "2016-08-28 19:08:17",
+        "date-captured": "2015-08-25 12:32:38",
+        "caption": ""
+    },
+    "DIA_B_0435.jpg": {
+        "date-added": "2016-08-28 19:08:17",
+        "date-captured": "",
+        "caption": ""
+    },
+    "IMG_0876.JPG": {
+        "date-added": "2016-08-28 19:08:17",
+        "date-captured": "2012-09-15 19:30:44",
+        "caption": ""
+    }
+}

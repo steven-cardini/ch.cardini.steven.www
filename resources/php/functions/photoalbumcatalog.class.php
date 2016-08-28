@@ -74,7 +74,7 @@ class PhotoAlbumCatalog {
   private function loadAlbums() {
     $this->catalog = [];
     $array = FileFunctions::jsonToArray(static::$json);
-    foreach ($array as $id => $data) {
+    foreach ((array) $array as $id => $data) {
       $data['id'] = $id;
       $this->catalog[$id] = new PhotoAlbum($data);
     }  

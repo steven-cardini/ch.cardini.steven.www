@@ -1,4 +1,4 @@
-  <h1>List Photo Albums</h1>
+  <h1>List of Photo Albums</h1>
 
   <?php
   $albumCatalog = PhotoAlbumCatalog::getInstance();
@@ -21,7 +21,7 @@
       echo "<tr><td>{$photoAlbum->getId()}</td>";
       echo "<td>{$photoAlbum->getTitle()}</td>";
       echo "<td><a href=\"?action=edit-album&id={$photoAlbum->getId()}\">EDIT ALBUM</a></td>";
-      echo "<td><a href=\"?action=edit-photos&id={$photoAlbum->getId()}\">EDIT PHOTOS</a></td></tr>";
+      echo "<td><a href=\"?action=add-photos&id={$photoAlbum->getId()}\">ADD PHOTOS</a></td></tr>";
     }
     ?>
     </tbody>
