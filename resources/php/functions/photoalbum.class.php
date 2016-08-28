@@ -41,6 +41,14 @@ class PhotoAlbum implements JsonSerializable {
     return $this->id;
   }
 
+  public function getCreationDate() {
+    return $this->creationDate;
+  }
+
+  public function getAlbumDate() {
+    return $this->albumDate;
+  }
+
   public function getTitle() {
     return $this->title;
   }
@@ -57,7 +65,6 @@ class PhotoAlbum implements JsonSerializable {
 
   public function jsonSerialize() {
     $array = [];
-    $array['id'] = $this->id;
     $array['date-created'] = $this->creationDate;
     $array['date-album'] = $this->albumDate;
     $array['title'] = $this->title;

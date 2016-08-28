@@ -51,17 +51,17 @@ spl_autoload_register('loadClass');
   <li role="presentation" class="dropdown"> 
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Photos <span class="caret"></span> </a> 
     <ul class="dropdown-menu"> 
-      <li><a href="?area=add-album">Add Album</a></li> 
-      <li><a href="?area=edit-album">Edit Album</a></li> 
+      <li><a href="?action=list-albums">List Albums</a></li> 
+      <li><a href="?action=add-album">Add Album</a></li> 
     </ul>
   </li>
 </ul>
 
 <?php
-if (isset($_GET['area']) && file_exists(PAGE_DIR."admin/{$_GET['area']}.php")) {
-  require_once(PAGE_DIR."admin/{$_GET['area']}.php");
+if (isset($_GET['action']) && file_exists(PAGE_DIR."admin/{$_GET['action']}.php")) {
+  require_once(PAGE_DIR."admin/{$_GET['action']}.php");
 } else {
-  echo '<h1>Please choose the area</h1><p>Choose the administration area in the navigation above.</p>';
+  echo '<h1>Please choose the action</h1><p>Choose the administration action in the navigation above.</p>';
 }
 ?> 
 

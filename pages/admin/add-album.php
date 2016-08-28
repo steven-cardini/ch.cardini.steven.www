@@ -1,10 +1,8 @@
   <h1>Add Photo Album</h1>
 
   <?php
-  $displayForm = true;
 
-  // FORM WAS SUBMITTED
-  if (isset($_POST['submitted'])) {
+  if (isset($_POST['submitted'])) {   // FORM WAS SUBMITTED
 
     // validate user input server-side
     try {
@@ -17,24 +15,21 @@
     } catch (Exception $e) {
       $errorMessage = $e->getMessage();
     }
-
     
-    // VALIDATION IS SUCCESSFUL
+    // validation is successful -> add album
     if (!isset($errorMessage)) {
-      $displayForm = false;
       $albumCatalog = PhotoAlbumCatalog::getInstance();
       $albumCatalog->addAlbum($_POST['album-date'], $_POST['album-title'], $_POST['album-caption']);
-
+      MessageHandler::printSuccess("The album was created.");
     }
 
-  } // end if isset post submitted
+  } // END IF FORM WAS SUBMITTED
 
-  if (isset($errorMessage)) {
-    echo '<div class="alert alert-danger" role="alert">'.$errorMessage.'</div>';
-  }
 
   // DISPLAY FORM
-  if ($displayForm) {
+  if (!isset($_POST['submitted']) || isset($errorMessage)) {
+    if (isset($errorMessage))
+      MessageHandler::printError($errorMessage);
   ?>
   
   <form class="form-horizontal js-feedback-form" role="form" method="post" action="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']); ?>">

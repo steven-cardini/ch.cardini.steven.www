@@ -12,7 +12,7 @@ class PhotoAlbumCatalog {
       $this->initializeJson();
     }
     
-    // initialize $this->albums _instance variable
+    // initialize $this->albums instance variable
     $this->loadAlbums();
   }
 
@@ -27,42 +27,56 @@ class PhotoAlbumCatalog {
     return $this->catalog;
   }
 
+  public function getAlbum($id) {
+    return $this->catalog[$id];
+  }
+
   public function addAlbum($date, $title, $caption) {
     $id = $this->generateId();
     $created = date('Y-m-d H:i:s');
-    $albumArray = array ("id" => "$id", "date-created" => "$created" , "date-album" => "$date", "title" => "$title", "caption" => "$caption", "front-photo" => "");
-    $album = new PhotoAlbum($albumArray);
-    $this->catalog[] = $album;
-    $this->saveAlbums();
+    $this->setArrayElement($id, $created, $date, $title, $caption);
   }
+
+  public function updateAlbum($id, $date, $title, $caption) {
+    $created = $this->catalog[$id]->getCreationDate();
+    $this->setArrayElement($id, $created, $date, $title, $caption);
+  }
+
+
 
 
   private function initializeJson() {
     FileFunctions::createFile(static::$json, 
-      '[
-        {
-        "id": "abcdef10",
-        "date-created": "2016-08-01 12:15:00",
-        "date-album": "2000-01-01",
-        "title": "dummy-title",
-        "caption": "dummy-caption",
-        "front-photo": "front.png"
+      '{
+        "abcdef10": {
+          "date-created": "2016-08-01 12:15:00",
+          "date-album": "2000-01-01",
+          "title": "dummy-title",
+          "caption": "dummy-caption",
+          "front-photo": "front.png"
         }
-       ]');
+      }');
   }
 
   private function generateId() {
     $bytes = random_bytes(4);
     $id = bin2hex($bytes);
-    
     return $id;
+  }
+
+  private function setArrayElement($id, $dateCreated, $dateAlbum, $title, $caption, $frontPhoto = "") {
+    $albumArray = array ("id" => "$id", "date-created" => "$dateCreated" , "date-album" => "$dateAlbum", "title" => "$title", "caption" => "$caption", "front-photo" => "$frontPhoto");
+    $album = new PhotoAlbum($albumArray);
+    $this->catalog[$id] = $album;
+    $this->saveAlbums();
   }
 
   private function loadAlbums() {
     $this->catalog = [];
     $array = FileFunctions::jsonToArray(static::$json);
-    foreach ($array as $i => $data) {
-      $this->catalog[] = new PhotoAlbum($data);
+    foreach ($array as $id => $data) {
+      $data['id'] = $id;
+      $this->catalog[$id] = new PhotoAlbum($data);
     }  
   }
 
