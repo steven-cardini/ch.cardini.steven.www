@@ -4,16 +4,17 @@ class PhotoAlbumCatalog {
   private static $instance;
   private static $json = JSON_DIR."photo-albums.json";
 
-  private $catalog;
+  private $albums;
+  private $albumsAreLoaded;
 
   protected function __construct () {
     // initialize photo-albums.json
     if (!file_exists (static::$json)) {
       $this->initializeJson();
     }
-    
-    // initialize $this->albums instance variable
-    $this->loadAlbums();
+
+    // load albums only when required
+    $this->albumsAreLoaded = false;
   }
 
   public static function getInstance () {
@@ -24,21 +25,25 @@ class PhotoAlbumCatalog {
   }
 
   public function getAlbums() {
-    return $this->catalog;
+    if (!$this->albumsAreLoaded) $this->loadAlbums(); // load albums if necessary
+    return $this->albums;
   }
 
   public function getAlbum($id) {
-    return $this->catalog[$id];
+    if (!$this->albumsAreLoaded) $this->loadAlbums(); // load albums if necessary
+    return $this->albums[$id];
   }
 
   public function addAlbum($date, $title, $caption) {
+    if (!$this->albumsAreLoaded) $this->loadAlbums(); // load albums if necessary
     $id = $this->generateId();
     $created = date('Y-m-d H:i:s');
     $this->setArrayElement($id, $created, $date, $title, $caption);
   }
 
   public function updateAlbum($id, $date, $title, $caption) {
-    $created = $this->catalog[$id]->getCreationDate();
+    if (!$this->albumsAreLoaded) $this->loadAlbums(); // load albums if necessary
+    $created = $this->albums[$id]->getCreationDate();
     $this->setArrayElement($id, $created, $date, $title, $caption);
   }
 
@@ -67,21 +72,21 @@ class PhotoAlbumCatalog {
   private function setArrayElement($id, $dateCreated, $dateAlbum, $title, $caption, $frontPhoto = "") {
     $albumArray = array ("id" => "$id", "date-created" => "$dateCreated" , "date-album" => "$dateAlbum", "title" => "$title", "caption" => "$caption", "front-photo" => "$frontPhoto");
     $album = new PhotoAlbum($albumArray);
-    $this->catalog[$id] = $album;
+    $this->albums[$id] = $album;
     $this->saveAlbums();
   }
 
   private function loadAlbums() {
-    $this->catalog = [];
+    $this->albums = [];
     $array = FileFunctions::jsonToArray(static::$json);
     foreach ((array) $array as $id => $data) {
       $data['id'] = $id;
-      $this->catalog[$id] = new PhotoAlbum($data);
+      $this->albums[$id] = new PhotoAlbum($data);
     }  
   }
 
   private function saveAlbums() {
-    FileFunctions::arrayToJson($this->catalog, static::$json);
+    FileFunctions::arrayToJson($this->albums, static::$json);
   }
 
   // Override methods to ensure class is singleton

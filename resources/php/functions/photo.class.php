@@ -7,6 +7,9 @@ class Photo implements JsonSerializable {
   private $caption;
 
   public function __construct(array $array) {
+    echo 'New Photo constructed';
+    print_r($array);
+    echo '<br />';
     $this->fileName = $array['file-name'];
     $this->addedDate = $array['date-added'];
     $this->captureDate = $array['date-captured'];

@@ -13,6 +13,7 @@ class PhotoAlbum implements JsonSerializable {
   private $thumbnailFolder;
 
   private $photos;
+  private $photosAreLoaded;
 
   public function __construct(array $array) {
     $this->id = $array['id'];
@@ -40,8 +41,8 @@ class PhotoAlbum implements JsonSerializable {
       $this->initializeDir($this->thumbnailFolder);
     }
 
-    // load photos
-    $this->loadPhotos();
+    // load photos only when required
+    $this->photosAreLoaded = false;
   }
 
   public function getId() {
@@ -64,9 +65,25 @@ class PhotoAlbum implements JsonSerializable {
     return $this->caption;
   }
 
+  public function getPhotos () {
+    if (!$this->photosAreLoaded) $this->loadPhotos(); // load photos if necessary
+    // TODO
+  }
+
+  public function getPhoto ($fileName) {
+    if (!$this->photosAreLoaded) $this->loadPhotos(); // load photos if necessary
+     // TODO
+  }
+
   public function addPhoto($fileName, $dateCaptured, $caption = "") {
+    if (!$this->photosAreLoaded) $this->loadPhotos(); // load photos if necessary
     $dateAdded = date('Y-m-d H:i:s');
     $this->setArrayElement ($fileName, $dateAdded, $dateCaptured, $caption);
+  }
+
+  public function updatePhoto ($fileName, $caption) {
+    if (!$this->photosAreLoaded) $this->loadPhotos(); // load photos if necessary
+    // TODO
   }
 
 
@@ -88,7 +105,7 @@ class PhotoAlbum implements JsonSerializable {
   private function initializeJson() {
     FileFunctions::createFile($this->json, 
       '{
-        "dummy.jpg" {
+        "dummy.jpg": {
           "date-added": "2016-08-28 18:58:39",
           "date-captured": "2015-03-11 11:12:13",
           "caption": "dummy-caption"
