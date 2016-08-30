@@ -65,9 +65,17 @@ class PhotoAlbum implements JsonSerializable {
     return $this->caption;
   }
 
+  public function getPhotoFolder() {
+    return $this->photoFolder;
+  }
+
+  public function getThumbnailFolder() {
+    return $this->thumbnailFolder;
+  }
+
   public function getPhotos () {
     if (!$this->photosAreLoaded) $this->loadPhotos(); // load photos if necessary
-    // TODO
+    return $this->photos;
   }
 
   public function getPhoto ($fileName) {
@@ -106,7 +114,7 @@ class PhotoAlbum implements JsonSerializable {
     FileFunctions::createFile($this->json, 
       '{
         "dummy.jpg": {
-          "date-added": "2016-08-28 18:58:39",
+          "date-uploaded": "2016-08-28 18:58:39",
           "date-captured": "2015-03-11 11:12:13",
           "caption": "dummy-caption"
         }
@@ -117,8 +125,8 @@ class PhotoAlbum implements JsonSerializable {
     FileFunctions::createFolder($dir);
   }
 
-  private function setArrayElement ($fileName, $dateAdded, $dateCaptured, $caption = "") {
-    $photoArray = array ("file-name" => "$fileName", "date-added" => "$dateAdded" , "date-captured" => "$dateCaptured", "caption" => "$caption");
+  private function setArrayElement ($fileName, $dateUploaded, $dateCaptured, $caption = "") {
+    $photoArray = array ("file-name" => "$fileName", "date-uploaded" => "$dateUploaded" , "date-captured" => "$dateCaptured", "caption" => "$caption");
     $photo = new Photo($photoArray);
     $this->photos[$fileName] = $photo;
     $this->savePhotos();
@@ -127,7 +135,8 @@ class PhotoAlbum implements JsonSerializable {
   private function loadPhotos() {
     $this->photos = [];
     $array = FileFunctions::jsonToArray($this->json);
-    foreach ((array) $array as $i => $data) {
+    foreach ((array) $array as $fileName => $data) {
+      $data['file-name'] = $fileName;
       $this->photos[] = new Photo($data);
     }  
   }

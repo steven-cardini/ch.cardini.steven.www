@@ -2,21 +2,26 @@
 class Photo implements JsonSerializable {
 
   private $fileName;
-  private $addedDate;
+  private $uploadDate;
   private $captureDate;
   private $caption;
 
   public function __construct(array $array) {
-    echo 'New Photo constructed';
-    print_r($array);
-    echo '<br />';
     $this->fileName = $array['file-name'];
-    $this->addedDate = $array['date-added'];
+    $this->uploadDate = $array['date-uploaded'];
     $this->captureDate = $array['date-captured'];
     $this->caption = $array['caption'];
   }
 
-  public function getDate() {
+  public function getFileName() {
+    return $this->fileName;
+  }
+
+  public function getUploadDate() {
+    return $this->uploadDate;
+  }
+
+  public function getCaptureDate() {
     return $this->captureDate;
   }
 
@@ -26,7 +31,7 @@ class Photo implements JsonSerializable {
 
   public function jsonSerialize() {
     $array = [];
-    $array['date-added'] = $this->addedDate;
+    $array['date-uploaded'] = $this->uploadDate;
     $array['date-captured'] = $this->captureDate;
     $array['caption'] = $this->caption;
     
