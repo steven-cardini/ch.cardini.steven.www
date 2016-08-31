@@ -18,6 +18,12 @@
           throw new Exception ('You must fill out all fields!');
         }
 
+        if (!empty($_POST['album-front-photo'])) {
+          $frontPhoto = $_POST['album-front-photo'];
+        } else {
+          $frontPhoto = "";
+        }
+
       } catch (Exception $e) {
         $errorMessage = $e->getMessage();
       }
@@ -25,15 +31,16 @@
     
       // validation is successful -> update album
       if (!isset($errorMessage)) {
-        $displayTable = false;
-        $albumCatalog->updateAlbum($album->getId(), $_POST['album-date'], $_POST['album-title'], $_POST['album-caption']);
+        $albumCatalog->updateAlbum($album->getId(), $_POST['album-date'], $_POST['album-title'], $_POST['album-caption'], $frontPhoto);
         MessageHandler::printSuccess("The album was updated.");
       }
 
    } // END IF FORM SUBMITTED
 
+  $album = $albumCatalog->getAlbum($_GET['id']); // reload album object in order to display new data after form was submitted
+  $photos = $album->getPhotos();
+
    
-   if (!isset($_POST['submitted']) || isset($errorMessage)) { // FORM NOT SUCCESSFULLY SUBMITTED
       if (isset($errorMessage))
         MessageHandler::printError($errorMessage);
       ?>
@@ -42,7 +49,7 @@
         <div class="form-group album-id">
           <label for="album-id" class="control-label col-sm-2">ID</label>
           <div class="col-sm-6">
-            <?php echo $album->getId(); ?>
+            <span id="album-id" class="form-control" disabled><?php echo $album->getId(); ?></span>
           </div>
         </div>
         
@@ -67,13 +74,27 @@
           </div>
         </div>
 
+        <div class="form-group album-front-photo">
+          <label for="album-front-photo" class="control-label col-sm-2">Front Photo</label>
+          <div class="col-sm-6">
+            <select class="form-control image-picker show-html" id="album-front-photo" name="album-front-photo">
+              <?php
+              echo '<option value=""></option>'; // empty option to avoid default chosing first image
+              foreach ($photos as $photo) {
+                if (!empty($album->getFrontPhoto()) && $album->getFrontPhoto() === $photo->getFileName()) { // current photo is front photo
+                  echo '<option value="'.$photo->getFileName().'" data-img-src="'.$album->getThumbnailFolder().$photo->getFileName().'" selected>'.$photo->getFileName().'</option>';
+                } else { // current photo is not front photo
+                  echo '<option value="'.$photo->getFileName().'" data-img-src="'.$album->getThumbnailFolder().$photo->getFileName().'">'.$photo->getFileName().'</option>';
+                }
+              } // end foreach
+              ?>
+            </select> 
+          </div>
+        </div>
+
         <div class="form-group">
           <div class="col-sm-2"></div>
           <button type="submit" class="btn btn-default" name="submitted">Update Album</button>
         </div>
 
       </form>
-    <?php
-  } // END IF FORM NOT SUCCESSFULLY SUBMITTED
-
-

@@ -118,9 +118,13 @@
                                     <div class="photo-hover-content">
                                         <i class="fa fa-plus fa-3x"></i>
                                     </div>
-                                </div>
-                                <img src="resources/img/portfolio/roundicons.png" class="img-responsive" alt="">
-                                </a>
+                                </div>';
+                      if (!empty($photoAlbum->getFrontPhoto())) {
+                        $item .= '<img src="'.$photoAlbum->getPhotoFolder().$photoAlbum->getFrontPhoto().'" class="img-responsive" alt="">';
+                      } else {
+                        $item .= '<img src="resources/img/portfolio/roundicons.png" class="img-responsive" alt="">';
+                      }
+                      $item .= '</a>
                                 <div class="photo-caption">
                                     <h4>'.$photoAlbum->getTitle().'</h4>
                                     <p class="text-muted">'.$photoAlbum->getCaption().'</p>

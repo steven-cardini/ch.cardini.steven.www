@@ -38,29 +38,20 @@ class PhotoAlbumCatalog {
     if (!$this->albumsAreLoaded) $this->loadAlbums(); // load albums if necessary
     $id = $this->generateId();
     $created = date('Y-m-d H:i:s');
-    $this->setArrayElement($id, $created, $date, $title, $caption);
+    $this->setArrayElement($id, $created, $date, $title, $caption, "");
   }
 
-  public function updateAlbum($id, $date, $title, $caption) {
+  public function updateAlbum($id, $date, $title, $caption, $frontPhoto="") {
     if (!$this->albumsAreLoaded) $this->loadAlbums(); // load albums if necessary
     $created = $this->albums[$id]->getCreationDate();
-    $this->setArrayElement($id, $created, $date, $title, $caption);
+    $this->setArrayElement($id, $created, $date, $title, $caption, $frontPhoto);
   }
 
 
 
 
   private function initializeJson() {
-    FileFunctions::createFile(static::$json, 
-      '{
-        "abcdef10": {
-          "date-created": "2016-08-01 12:15:00",
-          "date-album": "2000-01-01",
-          "title": "dummy-title",
-          "caption": "dummy-caption",
-          "front-photo": "front.png"
-        }
-      }');
+    FileFunctions::createFile(static::$json, '{}');
   }
 
   private function generateId() {
@@ -69,7 +60,7 @@ class PhotoAlbumCatalog {
     return $id;
   }
 
-  private function setArrayElement($id, $dateCreated, $dateAlbum, $title, $caption, $frontPhoto = "") {
+  private function setArrayElement($id, $dateCreated, $dateAlbum, $title, $caption, $frontPhoto) {
     $albumArray = array ("id" => "$id", "date-created" => "$dateCreated" , "date-album" => "$dateAlbum", "title" => "$title", "caption" => "$caption", "front-photo" => "$frontPhoto");
     $album = new PhotoAlbum($albumArray);
     $this->albums[$id] = $album;

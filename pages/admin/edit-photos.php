@@ -9,7 +9,6 @@
     exit ("ID of photo album is missing!");
 
   $album = $albumCatalog->getAlbum($_GET['id']);
-  $photos = $album->getPhotos();
 
   if (isset ($_POST['submitted'])) { // FORM SUBMITTED
       // validate user input server-side
@@ -33,8 +32,10 @@
 
    } // END IF FORM SUBMITTED
 
+  $album = $albumCatalog->getAlbum($_GET['id']); // reload album object in order to display new data after form was submitted
+  $photos = $album->getPhotos();
+
    
-   if (!isset($_POST['submitted']) || isset($errorMessage)) { // FORM NOT SUCCESSFULLY SUBMITTED
       if (isset($errorMessage))
         MessageHandler::printError($errorMessage);
       ?>
@@ -65,7 +66,3 @@
           <button type="submit" class="btn btn-default" name="submitted">Update Photos</button>
 
       </form>
-    <?php
-  } // END IF FORM NOT SUCCESSFULLY SUBMITTED
-
-

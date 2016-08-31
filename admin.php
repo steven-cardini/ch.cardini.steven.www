@@ -28,6 +28,9 @@ spl_autoload_register('loadClass');
     <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 
+    <!-- Image Picker CSS -->
+    <link href="resources/vendor/image-picker/image-picker.css" rel="stylesheet">
+
     <!-- Theme CSS -->
     <link href="resources/css/style.css" rel="stylesheet">
 
@@ -72,6 +75,13 @@ if (isset($_GET['action']) && file_exists(PAGE_DIR."admin/{$_GET['action']}.php"
 
 <!-- Bootstrap Core JavaScript -->
 <script src="resources/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- Image Picker JavaScript -->
+<script src="resources/vendor/image-picker/image-picker.min.js"></script>
+
+<script>
+  $("#album-front-photo").imagepicker();
+</script>
 
 </body>
 

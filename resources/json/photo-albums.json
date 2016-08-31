@@ -4,14 +4,14 @@
         "date-album": "2000-01-01",
         "title": "dummy-title",
         "caption": "dummy-caption",
-        "front-photo": "front.png"
+        "front-photo": ""
     },
     "fb820d09": {
         "date-created": "2016-08-25 13:16:27",
         "date-album": "2015-09-01",
-        "title": "On the island of Tenerife",
-        "caption": "a relaxing week in the southern part of Spain",
-        "front-photo": ""
+        "title": "On the island of Teneriffa",
+        "caption": "a relaxing week in the southern part of Spanish Tenerife",
+        "front-photo": "20150825-cst-8078.jpg"
     },
     "94a311e1": {
         "date-created": "2016-08-28 12:51:51",
