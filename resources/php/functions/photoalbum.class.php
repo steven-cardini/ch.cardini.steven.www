@@ -84,7 +84,11 @@ class PhotoAlbum implements JsonSerializable {
 
   public function getPhoto ($fileName) {
     if (!$this->photosAreLoaded) $this->loadPhotos(); // load photos if necessary
-     // TODO
+    if (isset($this->photos[$fileName])) {
+      return $this->photos[$fileName];
+    } else {
+      return false;
+    }
   }
 
   public function addPhoto($fileName, $dateCaptured, $caption = "") {
@@ -98,6 +102,26 @@ class PhotoAlbum implements JsonSerializable {
     // TODO
   }
 
+  public function getThumbnailTable ($getCaption = false) {
+    if ($getCaption) {
+      $cellHtml = '<div class="col-md-3 col-sm-4 col-xs-6">';
+    } else {
+      $cellHtml = '<div class="col-md-2 col-sm-3 col-xs-6">';
+    }
+
+    $thumbnailTable = '<div class="thumbnail-table">';
+    
+    foreach ($this->photos as $photo) {  
+      $thumbnailTable .= $cellHtml;
+      $thumbnailTable .= "<img src=\"{$this->thumbnailFolder}{$photo->getFileName()}\" />";
+      if ($getCaption) $thumbnailTable .= '<br /> <textarea required="required" class="form-control" id="caption-'.$photo->getFileName().'" name="caption-'.$photo->getFileName().'" rows="3">'.$photo->getCaption().'</textarea>';
+      $thumbnailTable .= '</div>'; // end cell
+    } // end foreach loop
+
+    $thumbnailTable .= '</div>';
+    return $thumbnailTable;
+  }
+
 
   public function jsonSerialize() {
     $array = [];
@@ -109,7 +133,6 @@ class PhotoAlbum implements JsonSerializable {
     
     return $array;
   }
-
 
 
 
@@ -134,7 +157,7 @@ class PhotoAlbum implements JsonSerializable {
     $array = FileFunctions::jsonToArray($this->json);
     foreach ((array) $array as $fileName => $data) {
       $data['file-name'] = $fileName;
-      $this->photos[] = new Photo($data);
+      $this->photos[$fileName] = new Photo($data);
     }  
   }
 

@@ -27,44 +27,67 @@
     // validation is successful -> add photos
     if (!isset($errorMessage)) {
       $total = count($_FILES['photos']['name']);
-      $photoPath = IMG_DIR . "albums/{$album->getId()}/";
-      $thumbnailPath = $photoPath . "thumbs/";
+      $photoPath = $album->getPhotoFolder();
+      $thumbnailPath = $album->getThumbnailFolder();
       
-      for ($i=0; $i<$total; $i++) {
-                
+      for ($i=0; $i<$total; $i++) {     
         $fileName = $_FILES["photos"]["name"][$i];
+        $tmpFilePath = $_FILES['photos']['tmp_name'][$i];
         $errorCode = $_FILES["photos"]["error"][$i];
+
         if ($errorCode != UPLOAD_ERR_OK) {
-          MessageHandler::printError("Error code $errorCode for file $fileName");
+          MessageHandler::printError("Error code $errorCode occurred for file $fileName");
           continue;
         }
 
-        $fileType = $_FILES["photos"]["type"][$i];
-        $tmpFilePath = $_FILES['photos']['tmp_name'][$i];
         if ($tmpFilePath == "") {
+          MessageHandler::printError("$fileName could not be uploaded to temporary folder.");
+          continue;
+        }
+
+        if (exif_imagetype($tmpFilePath) != IMAGETYPE_JPEG && exif_imagetype($tmpFilePath) != IMAGETYPE_PNG && exif_imagetype($tmpFilePath) != IMAGETYPE_GIF) {
+          MessageHandler::printError("$fileName is not an accepted image file type [JPEG, PNG, GIF].");
+          continue;
+        }
+
+        if (!empty($album->getPhoto($fileName))) {
+          MessageHandler::printError("$fileName has already been uploaded to this album.");
           continue;
         }
         
-        move_uploaded_file($tmpFilePath, $photoPath.$fileName);     
-        Photo::createThumbnail ($fileName, $fileType, $photoPath, $thumbnailPath);
+        $uploaded = move_uploaded_file ($tmpFilePath, $photoPath.$fileName);     
+        $resized  = Photo::copyResized ($photoPath.$fileName, $thumbnailPath.$fileName, 150, 150);
+
+        if (!$uploaded) {
+          MessageHandler::printError("$fileName could not be moved to photo folder.");
+          continue;
+        }
+
+        if (!$resized) {
+          MessageHandler::printError("Thumbnail for $fileName could not be created.");
+          continue;
+        }
         
         $captureDate = "";
         $exif_data = exif_read_data ($photoPath.$fileName);
         if (isset ($exif_data['DateTimeOriginal'])) {
           $dateTimeOriginal = strtotime($exif_data['DateTimeOriginal']);
           $captureDate = date('Y-m-d H:i:s', $dateTimeOriginal);
-        }                
+        }  
+
         $album->addPhoto($fileName, $captureDate);
+
+        MessageHandler::printSuccess("$fileName successfully added to the album.");
       }
 
-      MessageHandler::printSuccess("The photos were added.");
     }
 
   } // END IF FORM WAS SUBMITTED
 
+  $album = $albumCatalog->getAlbum($_GET['id']); // reload album object in order to display new data after form was submitted
+  $photos = $album->getPhotos();
 
   // DISPLAY FORM
-  if (!isset($_POST['submitted']) || isset($errorMessage)) {
     if (isset($errorMessage))
       MessageHandler::printError($errorMessage);
   ?>
@@ -99,5 +122,8 @@
 
   </form>
 
+<br />
+
   <?php
-  } // end if display form
+  echo $album->getThumbnailTable();
+

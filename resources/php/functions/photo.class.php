@@ -40,58 +40,67 @@ class Photo implements JsonSerializable {
 
 
 
-  static function createThumbnail ($fileName, $fileType, $photoPath, $thumbnailPath, $thumbSize = 100) {
-    $photoFile = $photoPath . $fileName;
-    $thumbFile = $thumbnailPath . $fileName;
+  static function copyResized ($sourcePath, $destinationPath, $newWidth = 100, $newHeight = 100) {
+    $splitArray = preg_split('/\//', $sourcePath);
+    $sourceFileName = end($splitArray);
 
-    if (!is_dir ($thumbnailPath)) {
-      FileFunctions::createFolder($thumbnailPath);
-    }
-
-    switch ($fileType) {
-      case 'image/jpg' : case 'image/jpeg' :
-        $src = imagecreatefromjpeg ($photoFile);
+    // Create image resource from source path
+    switch (exif_imagetype($sourcePath)) {
+      case IMAGETYPE_JPEG :
+        $sourceImage = imagecreatefromjpeg ($sourcePath);
         break;
-      case 'image/png' :
-        $src = imagecreatefrompng($photoFile);
+      case IMAGETYPE_PNG :
+        $sourceImage = imagecreatefrompng($sourcePath);
         break;
-      case 'image/gif' :
-        $src = imagecreatefromgif($photoFile);
+      case IMAGETYPE_GIF :
+        $sourceImage = imagecreatefromgif($sourcePath);
         break;
       default:
-        MessageHandler::displayError("File Type of $fileName is not a valid image!");
-        return;
+        MessageHandler::printError("File Type of $sourceFileName is not a valid image!");
+        return false;
     }
 
-    // Determine the Image Dimensions
-    $oldW = imagesx($src);
-    $oldH = imagesy($src);
+    // Create the new image (still blank/empty)
+    $newImage = imagecreatetruecolor ($newWidth , $newHeight);
 
-    // Calculate the New Image Dimensions
-    if ($oldH > $oldW){ // Portrait
-      $limitingDim = $oldW;
-    } else { // Landscape
-      $limitingDim = $oldH;
+    // Determine the source image Dimensions
+    $sourceImageWidth = imagesx($sourceImage);
+    $sourceImageHeight = imagesy($sourceImage);
+    $sourceImageAspectRatio = $sourceImageWidth / $sourceImageHeight;
+    $newImageAspectRatio = $newWidth / $newHeight;
+
+    // Determine parameters and copy part of the source image into the new image
+    if ($newImageAspectRatio >= $sourceImageAspectRatio) { // width is the limiting factor for the source image
+      $src_x = 0;
+      $src_w = $sourceImageWidth;
+      $src_h = $src_w / $newImageAspectRatio;
+      $src_y = ($sourceImageHeight - $src_h) / 2;
+    } else { // height of source image is limiting factor
+      $src_y = 0;
+      $src_h = $sourceImageHeight;
+      $src_w = $src_h * $newImageAspectRatio;
+      $src_x = ($sourceImageWidth - $src_w) / 2;
     }
+    imagecopyresampled ($newImage, $sourceImage, 0, 0, $src_x, $src_y, $newWidth, $newHeight, $src_w, $src_h);
 
-    // Create the New Image
-    $new = imagecreatetruecolor ($thumbSize , $thumbSize);
-
-    // Transcribe the Source Image into the New (Square) Image
-    imagecopyresampled ($new, $src, 0, 0, ($oldW-$limitingDim)/2 , ($oldH-$limitingDim)/2 , $thumbSize , $thumbSize , $limitingDim , $limitingDim);
-    switch ($fileType) {
-      case 'image/jpg' : case 'image/jpeg' :
-        $src = imagejpeg ($new, $thumbFile, 100);
+    // Save new image to destination path
+    switch (exif_imagetype($sourcePath)) {
+      case IMAGETYPE_JPEG :
+        $success = imagejpeg ($newImage, $destinationPath, 100);
         break;
-      case 'image/png' :
-        $src = imagepng ($new, $thumbFile);
+      case IMAGETYPE_PNG :
+        $success = imagepng ($newImage, $destinationPath);
         break;
-      case 'image/gif' :
-        $src = imagegif ($new, $thumbFile);
+      case IMAGETYPE_GIF :
+        $success = imagegif ($newImage, $destinationPath);
         break;
     }
     
-    imagedestroy ($new);
+    // Remove image resources to reallocate space
+    imagedestroy ($sourceImage);
+    imagedestroy ($newImage);
+
+    return $success;
   }
 
 }

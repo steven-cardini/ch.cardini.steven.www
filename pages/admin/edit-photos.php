@@ -43,24 +43,7 @@
       <form class="form-horizontal js-feedback-form" role="form" method="post" action="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']); ?>">
 
           <?php 
-          $n = 0;
-          foreach ($photos as $photo) {  
-            if ($n%4 === 0) echo '<div class="row">';
-            echo '<div class="col-sm-3">';
-              echo "<img src=\"{$album->getThumbnailFolder()}{$photo->getFileName()}\" />";
-              echo '<br />';
-              echo '<textarea required="required" class="form-control" id="caption-'.$photo->getFileName().'" name="caption-'.$photo->getFileName().'" rows="3">'.$photo->getCaption().'</textarea>';
-            echo '</div>'; // end cell
-            if ($n%4 === 3) echo '</div><br />'; // end row
-            $n++;
-          } //end for each loop
-
-          while ($n%4 !== 0) { // fill up last row if necessary
-            echo '<div class="col-sm-3">&nbsp;</div>';
-            if ($n%4 === 3) echo '</div><br />'; // end row
-            $n++;
-          }
-
+          echo $album->getThumbnailTable(true);
           ?>
         
           <button type="submit" class="btn btn-default" name="submitted">Update Photos</button>

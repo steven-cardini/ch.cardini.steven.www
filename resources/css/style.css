@@ -2,6 +2,12 @@ body {
   overflow-x: hidden;
   font-family: "Roboto Slab", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+
+div.thumbnail-table div {
+  margin-bottom: 15px;
+}
+
+
 .text-muted {
   color: #777777;
 }
