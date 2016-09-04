@@ -334,8 +334,14 @@
     <!-- Galleria JavaScript -->
     <script src="resources/vendor/galleria/galleria-1.4.2.js"></script>
     <script>
-      Galleria.loadTheme('resources/vendor/galleria/themes/classic/galleria.classic.js');
-      Galleria.run('.galleria');
+      var loadGallery = true;
+      $('.modal-photo').on('show.bs.modal', function (e) {
+        if (loadGallery) {
+          Galleria.loadTheme('resources/vendor/galleria/themes/classic/galleria.classic.js');
+          Galleria.run('.galleria');
+          loadGallery = false;
+        }
+      })
     </script>
 
 </body>
