@@ -124,6 +124,14 @@
 
 <br />
 
-  <?php
-  echo $album->getThumbnailTable();
+  <!-- show photos that have been uploaded already -->
+  <div class="thumbnail-table">
+    <?php
+    foreach ($photos as $photo) {
+      echo "<div class=\"col-md-2 col-sm-3 col-xs-6\">";
+        echo "<img src=\"{$album->getThumbnailFolder()}{$photo->getFileName()}\" />";
+      echo "</div>";
+    }
+    ?>
+  </div> <!-- end div.thumbnail-table -->
 

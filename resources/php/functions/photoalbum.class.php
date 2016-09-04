@@ -61,7 +61,7 @@ class PhotoAlbum implements JsonSerializable {
     return $this->title;
   }
 
-  public function getCaption() {
+  public function editData() {
     return $this->caption;
   }
 
@@ -101,27 +101,6 @@ class PhotoAlbum implements JsonSerializable {
     if (!$this->photosAreLoaded) $this->loadPhotos(); // load photos if necessary
     // TODO
   }
-
-  public function getThumbnailTable ($getCaption = false) {
-    if ($getCaption) {
-      $cellHtml = '<div class="col-md-3 col-sm-4 col-xs-6">';
-    } else {
-      $cellHtml = '<div class="col-md-2 col-sm-3 col-xs-6">';
-    }
-
-    $thumbnailTable = '<div class="thumbnail-table">';
-    
-    foreach ($this->photos as $photo) {  
-      $thumbnailTable .= $cellHtml;
-      $thumbnailTable .= "<img src=\"{$this->thumbnailFolder}{$photo->getFileName()}\" />";
-      if ($getCaption) $thumbnailTable .= '<br /> <textarea required="required" class="form-control" id="caption-'.$photo->getFileName().'" name="caption-'.$photo->getFileName().'" rows="3">'.$photo->getCaption().'</textarea>';
-      $thumbnailTable .= '</div>'; // end cell
-    } // end foreach loop
-
-    $thumbnailTable .= '</div>';
-    return $thumbnailTable;
-  }
-
 
   public function jsonSerialize() {
     $array = [];

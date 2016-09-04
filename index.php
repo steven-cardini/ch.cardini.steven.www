@@ -334,12 +334,12 @@
     <!-- Galleria JavaScript -->
     <script src="resources/vendor/galleria/galleria-1.4.2.js"></script>
     <script>
-      var loadGallery = true;
+      var loadGalleria = true;
       $('.modal-photo').on('show.bs.modal', function (e) {
-        if (loadGallery) {
+        if (loadGalleria) {
           Galleria.loadTheme('resources/vendor/galleria/themes/classic/galleria.classic.js');
           Galleria.run('.galleria');
-          loadGallery = false;
+          loadGalleria = false;
         }
       })
     </script>

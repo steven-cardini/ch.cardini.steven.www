@@ -41,10 +41,17 @@
       ?>
 
       <form class="form-horizontal js-feedback-form" role="form" method="post" action="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']); ?>">
-
-          <?php 
-          echo $album->getThumbnailTable(true);
+        <div class="thumbnail-table">
+          <?php
+          foreach ($photos as $photo) {
+            echo "<div class=\"col-md-3 col-sm-4 col-xs-6\">";
+              echo "<img src=\"{$album->getThumbnailFolder()}{$photo->getFileName()}\" />";
+              echo "<br /> <label for=\"photos[{$photo->getFileName()}][caption]\" class=\"control-label col-sm-2\">Caption</label>";
+              echo "<textarea class=\"form-control\" id=\"photos[{$photo->getFileName()}][caption]\" name=\"photos[{$photo->getFileName()}][caption]\" rows=\"3\">{$photo->getCaption()}</textarea>'";
+            echo "</div>";
+          }
           ?>
+         </div> <!-- end div.thumbnail-table --> 
         
           <button type="submit" class="btn btn-default" name="submitted">Update Photos</button>
 
