@@ -330,25 +330,38 @@
     <script src="resources/vendor/galleria/galleria-1.4.2.js"></script>
     <script>
       
-      Galleria.loadTheme('resources/vendor/galleria/themes/classic/galleria.classic.js');
+      Galleria.loadTheme("resources/vendor/galleria/themes/classic/galleria.classic.js");
 
-      $('.modal-photo').on('show.bs.modal', function (e) {      
+      $(".modal-photo").on("show.bs.modal", function (e) {
         var modal = $(this);
-        var array = modal.attr('id').split('-');
+        var array = modal.attr("id").split("-");
         var albumId = array[array.length-1];
-        var json = '<?php echo JSON_DIR; ?>galleria/' + albumId + '.json';
+        var json = "<?php echo JSON_DIR; ?>galleria/" + albumId + ".json";
 
         $.getJSON (json, function() {
           console.log ("success");
-          })
-          .done(function(data) {
-            Galleria.run('#photos-'+albumId+' .galleria', { dataSource: data });
-            console.log ("second success");
-          })
-          .fail(function() {
-            console.log ("error");
-          });        
-      })
+        })
+
+        .done(function(data) {
+          Galleria.run("#photos-"+albumId+" .galleria", { 
+            dataSource: data,
+            extend: function() {
+              this.attachKeyboard({
+                left: this.prev,
+                right: this.next
+              });
+            } 
+          });
+          console.log ("second success");
+        })
+           
+        .fail(function() {
+          console.log ("error");
+        });          
+      
+      });
+
+      
     </script>
 
 </body>
