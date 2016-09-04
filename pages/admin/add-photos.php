@@ -29,7 +29,9 @@
       $total = count($_FILES['photos']['name']);
       $photoPath = $album->getPhotoFolder();
       $thumbnailPath = $album->getThumbnailFolder();
-      
+
+      $galleria = new Galleria($album->getId());
+
       for ($i=0; $i<$total; $i++) {     
         $fileName = $_FILES["photos"]["name"][$i];
         $tmpFilePath = $_FILES['photos']['tmp_name'][$i];
@@ -76,9 +78,12 @@
         }  
 
         $album->addPhoto($fileName, $captureDate);
+        $galleria->addPhoto($photoPath.$fileName, $thumbnailPath.$fileName);
 
         MessageHandler::printSuccess("$fileName successfully added to the album.");
       }
+
+      $galleria->save();
 
     }
 
