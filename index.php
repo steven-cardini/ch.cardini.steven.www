@@ -37,6 +37,9 @@
     <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 
+    <!-- Galleria Theme CSS -->
+    <link type="text/css" rel="stylesheet" href="resources/vendor/galleria/themes/classic/galleria.classic.css">
+    
     <!-- Theme CSS -->
     <link href="resources/css/style.css" rel="stylesheet">
 
@@ -296,38 +299,18 @@
     <?php
         $n = 0;
         foreach ($photoAlbums as $photoAlbum) {
-            $item = '<!-- Photo Modal '.$n.' -->
-    <div class="photo-modal modal fade" id="photoModal'.$n++.'" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <!-- Project Details Go Here -->
-                            <h2>Project Name</h2>
-                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                            <img class="img-responsive img-centered" src="resources/img/portfolio/roundicons-free.png" alt="">
-                            <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
-                            <p>
-                                <strong>Want these icons in this portfolio item sample?</strong>You can download 60 of them for free, courtesy of <a href="https://getdpd.com/cart/hoplink/18076?referrer=bvbo4kax5k8ogc">RoundIcons.com</a>, or you can purchase the 1500 icon set <a href="https://getdpd.com/cart/hoplink/18076?referrer=bvbo4kax5k8ogc">here</a>.</p>
-                            <ul class="list-inline">
-                                <li>Date: July 2014</li>
-                                <li>Client: Round Icons</li>
-                                <li>Category: Graphic Design</li>
-                            </ul>
-                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>';
+           
+          $item = 
+          '<div id="photoModal'.$n++.'" class="modal fade modal-photo" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <!-- Wrapper for slides -->
+                <div class="galleria">';
+        
+    foreach ($photoAlbum->getPhotos() as $photo) {
+      $item .= '<a href="'.$photoAlbum->getPhotoFolder().$photo->getFileName().'"><img src="'.$photoAlbum->getThumbnailFolder().$photo->getFileName().'" data-title="My title" data-description="'.$photo->getCaption().'"></a>';
+    }
+    $item .= '</div></div></div></div>';
             echo $item;
         }
     ?>
@@ -347,6 +330,13 @@
 
     <!-- Theme JavaScript -->
     <script src="resources/js/agency.min.js"></script>
+
+    <!-- Galleria JavaScript -->
+    <script src="resources/vendor/galleria/galleria-1.4.2.js"></script>
+    <script>
+      Galleria.loadTheme('resources/vendor/galleria/themes/classic/galleria.classic.js');
+      Galleria.run('.galleria');
+    </script>
 
 </body>
 

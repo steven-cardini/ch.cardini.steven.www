@@ -7,6 +7,30 @@ div.thumbnail-table div {
   margin-bottom: 15px;
 }
 
+.modal-photo .galleria {
+  background-color: black;
+  height: 100%;
+  width:  100%;
+}
+
+.modal-photo .modal-dialog {
+  height: 92%;
+  width: 92%;
+  margin: 0;
+  position: absolute;
+  bottom: 1%;
+  left: 4%;
+  right: 4%;
+}
+
+.modal-photo .modal-content {
+  height: 100%;
+  width:  100%;
+}
+
+
+
+
 
 .text-muted {
   color: #777777;
