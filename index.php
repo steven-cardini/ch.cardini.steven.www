@@ -28,20 +28,20 @@
     <title>Steven Cardini</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo RES_DIR; ?>/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="resources/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo RES_DIR; ?>/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 
     <!-- Galleria Theme CSS -->
-    <link type="text/css" rel="stylesheet" href="resources/vendor/galleria/themes/classic/galleria.classic.css">
+    <link type="text/css" rel="stylesheet" href="<?php echo RES_DIR; ?>/vendor/galleria/themes/classic/galleria.classic.css">
     
     <!-- Theme CSS -->
-    <link href="resources/css/style.css" rel="stylesheet">
+    <link href="<?php echo RES_DIR; ?>/css/style.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -311,59 +311,27 @@
     ?>
 
     <!-- jQuery -->
-    <script src="resources/vendor/jquery/jquery.min.js"></script>
+    <script src="<?php echo RES_DIR; ?>/vendor/jquery/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="resources/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="<?php echo RES_DIR; ?>/vendor/bootstrap/js/bootstrap.min.js"></script>
 
     <!-- Plugin JavaScript -->
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
 
+    <!-- Galleria JavaScript -->
+    <script src="<?php echo RES_DIR; ?>/vendor/galleria/galleria-1.4.2.js"></script>
+
     <!-- Contact Form JavaScript -->
-    <script src="resources/js/jqBootstrapValidation.js"></script>
-    <script src="resources/js/contact_me.js"></script>
+    <script src="<?php echo RES_DIR; ?>/js/jqBootstrapValidation.js"></script>
+    <script src="<?php echo RES_DIR; ?>/js/contact_me.js"></script>
 
     <!-- Theme JavaScript -->
-    <script src="resources/js/agency.min.js"></script>
+    <script src="<?php echo RES_DIR; ?>/js/agency.min.js"></script>
 
-    <!-- Galleria JavaScript -->
-    <script src="resources/vendor/galleria/galleria-1.4.2.js"></script>
-    <script>
-      
-      Galleria.loadTheme("resources/vendor/galleria/themes/classic/galleria.classic.js");
-
-      $(".modal-photo").on("show.bs.modal", function (e) {
-        var modal = $(this);
-        var array = modal.attr("id").split("-");
-        var albumId = array[array.length-1];
-        var json = "<?php echo JSON_DIR; ?>galleria/" + albumId + ".json";
-
-        $.getJSON (json, function() {
-          console.log ("success");
-        })
-
-        .done(function(data) {
-          Galleria.run("#photos-"+albumId+" .galleria", { 
-            dataSource: data,
-            extend: function() {
-              this.attachKeyboard({
-                left: this.prev,
-                right: this.next
-              });
-            } 
-          });
-          console.log ("second success");
-        })
-           
-        .fail(function() {
-          console.log ("error");
-        });          
-      
-      });
-
-      
-    </script>
-
+    <!-- Custom JavaScript -->
+    <script src="<?php echo RES_DIR; ?>/js/custom.js"></script>
+    
 </body>
 
 </html>
