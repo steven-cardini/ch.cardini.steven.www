@@ -93,13 +93,15 @@ class PhotoAlbum implements JsonSerializable {
 
   public function addPhoto($fileName, $dateCaptured, $caption = "") {
     if (!$this->photosAreLoaded) $this->loadPhotos(); // load photos if necessary
-    $dateAdded = date('Y-m-d H:i:s');
-    $this->setArrayElement ($fileName, $dateAdded, $dateCaptured, $caption);
+    $dateUploaded = date('Y-m-d H:i:s');
+    $this->setArrayElement ($fileName, $dateUploaded, $dateCaptured, $caption);
   }
 
   public function updatePhoto ($fileName, $caption) {
     if (!$this->photosAreLoaded) $this->loadPhotos(); // load photos if necessary
-    // TODO
+    $dateUploaded = $this->photos[$fileName]->getUploadDate();
+    $dateCaptured = $this->photos[$fileName]->getCaptureDate();
+    $this->setArrayElement ($fileName, $dateUploaded, $dateCaptured, $caption);
   }
 
   public function jsonSerialize() {

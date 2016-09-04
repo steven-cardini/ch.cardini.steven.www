@@ -13,8 +13,8 @@
   if (isset ($_POST['submitted'])) { // FORM SUBMITTED
       // validate user input server-side
       try {
-        // ensure that user filled out all compulsory fields
-        if (empty($_POST['album-date']) || empty($_POST['album-title']) || empty($_POST['album-caption'])) {
+        // TODO: ensure that user filled out all compulsory fields
+        if (false) {
           throw new Exception ('You must fill out all fields!');
         }
 
@@ -25,8 +25,9 @@
     
       // validation is successful -> update album
       if (!isset($errorMessage)) {
-        $displayTable = false;
-        $albumCatalog->updateAlbum($album->getId(), $_POST['album-date'], $_POST['album-title'], $_POST['album-caption']);
+        foreach ($_POST['photos'] as $fileName => $valueArray) {
+          $album->updatePhoto($fileName, $valueArray['caption']);
+        }
         MessageHandler::printSuccess("The album was updated.");
       }
 
