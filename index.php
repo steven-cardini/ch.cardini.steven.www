@@ -98,7 +98,7 @@
         </div>
     </header>
 
-    <!-- Portfolio Grid Section -->
+    <!-- Photo Grid Section -->
     <section id="photos" class="bg-light-gray">
         <div class="container">
             <div class="row">
@@ -112,11 +112,10 @@
                 <?php
                     $albumCatalog = PhotoAlbumCatalog::getInstance();
                     $photoAlbums = $albumCatalog->getAlbums();
-                    $n = 0;
 
                     foreach ($photoAlbums as $photoAlbum) {
                         $item = '<div class="col-md-4 col-sm-6 photo-item">
-                                <a href="#photoModal'.$n++.'" class="photo-link" data-toggle="modal">
+                                <a href="#photos-'.$photoAlbum->getId().'" class="photo-link" data-toggle="modal">
                                 <div class="photo-hover">
                                     <div class="photo-hover-content">
                                         <i class="fa fa-plus fa-3x"></i>
@@ -297,19 +296,15 @@
     <!-- Photo Modals -->
 
     <?php
-        $n = 0;
         foreach ($photoAlbums as $photoAlbum) {
            
           $item = 
-          '<div id="photoModal'.$n++.'" class="modal fade modal-photo" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+          '<div id="photos-'.$photoAlbum->getId().'" class="modal fade modal-photo" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
                 <!-- Wrapper for slides -->
                 <div class="galleria">';
-        
-    foreach ($photoAlbum->getPhotos() as $photo) {
-      $item .= '<a href="'.$photoAlbum->getPhotoFolder().$photo->getFileName().'"><img src="'.$photoAlbum->getThumbnailFolder().$photo->getFileName().'" data-title="My title" data-description="'.$photo->getCaption().'"></a>';
-    }
+
     $item .= '</div></div></div></div>';
             echo $item;
         }
@@ -334,13 +329,25 @@
     <!-- Galleria JavaScript -->
     <script src="resources/vendor/galleria/galleria-1.4.2.js"></script>
     <script>
-      var loadGalleria = true;
-      $('.modal-photo').on('show.bs.modal', function (e) {
-        if (loadGalleria) {
-          Galleria.loadTheme('resources/vendor/galleria/themes/classic/galleria.classic.js');
-          Galleria.run('.galleria');
-          loadGalleria = false;
-        }
+      
+      Galleria.loadTheme('resources/vendor/galleria/themes/classic/galleria.classic.js');
+
+      $('.modal-photo').on('show.bs.modal', function (e) {      
+        var modal = $(this);
+        var array = modal.attr('id').split('-');
+        var albumId = array[array.length-1];
+        var json = '<?php echo JSON_DIR; ?>galleria/' + albumId + '.json';
+
+        $.getJSON (json, function() {
+          console.log ("success");
+          })
+          .done(function(data) {
+            Galleria.run('#photos-'+albumId+' .galleria', { dataSource: data });
+            console.log ("second success");
+          })
+          .fail(function() {
+            console.log ("error");
+          });        
       })
     </script>
 

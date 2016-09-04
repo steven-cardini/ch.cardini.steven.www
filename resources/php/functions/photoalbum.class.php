@@ -61,7 +61,7 @@ class PhotoAlbum implements JsonSerializable {
     return $this->title;
   }
 
-  public function editData() {
+  public function getCaption() {
     return $this->caption;
   }
 
