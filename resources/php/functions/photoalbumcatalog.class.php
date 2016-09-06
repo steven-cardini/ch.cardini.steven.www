@@ -2,7 +2,7 @@
 class PhotoAlbumCatalog {
 
   private static $instance;
-  private static $json = JSON_DIR."photo-albums.json";
+  private static $json = JSON_DIR."photo/albums.json";
 
   private $albums;
   private $albumsAreLoaded;

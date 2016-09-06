@@ -2,7 +2,7 @@
 
 class Galleria {
 
-  private static $jsonPath = JSON_DIR . 'galleria/';
+  private static $jsonPath = JSON_DIR . 'photo/galleria/';
   
   private $media;
   private $index;
@@ -45,7 +45,7 @@ class Galleria {
   }
 
 
-  private function nextIndex() {
+  private function nextIndex () {
     if ($this->index < 0) {
       $this->index = 0;
       return 0;

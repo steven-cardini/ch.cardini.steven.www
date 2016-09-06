@@ -24,7 +24,7 @@ class PhotoAlbum implements JsonSerializable {
     $this->frontPhoto = $array['front-photo'];
 
     // initialize JSON file
-    $this->json = JSON_DIR."photo-albums/$this->id.json";
+    $this->json = JSON_DIR."photo/backup/$this->id.json";
     if (!file_exists ($this->json)) {
       $this->initializeJson();
     }
