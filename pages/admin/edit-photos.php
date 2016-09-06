@@ -28,6 +28,7 @@
         foreach ($_POST['photos'] as $fileName => $valueArray) {
           $album->updatePhoto($fileName, $valueArray['caption']);
         }
+        $album->generateGalleriaJson(); // generate the JSON file for Galleria.js
         MessageHandler::printSuccess("The album was updated.");
       }
 

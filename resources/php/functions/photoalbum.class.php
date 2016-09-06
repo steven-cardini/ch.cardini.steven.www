@@ -104,6 +104,11 @@ class PhotoAlbum implements JsonSerializable {
     $this->setArrayElement ($fileName, $dateUploaded, $dateCaptured, $caption);
   }
 
+  public function generateGalleriaJson () {
+    $galleria = new Galleria ($this);
+    $galleria->persist();
+  }
+
   public function jsonSerialize() {
     $array = [];
     $array['date-created'] = $this->creationDate;
@@ -130,7 +135,7 @@ class PhotoAlbum implements JsonSerializable {
     $photoArray = array ("file-name" => "$fileName", "date-uploaded" => "$dateUploaded" , "date-captured" => "$dateCaptured", "caption" => "$caption");
     $photo = new Photo($photoArray);
     $this->photos[$fileName] = $photo;
-    $this->savePhotos();
+    $this->persistPhotos();
   }
 
   private function loadPhotos() {
@@ -142,7 +147,7 @@ class PhotoAlbum implements JsonSerializable {
     }  
   }
 
-  private function savePhotos() {
+  private function persistPhotos() {
     FileFunctions::arrayToJson($this->photos, $this->json);
   }
     

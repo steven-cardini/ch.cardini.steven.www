@@ -8,17 +8,12 @@ class Galleria {
   private $index;
   private $json;
 
-  public function __construct ($albumId) {
-    $this->json = static::$jsonPath . $albumId . '.json';
-    if (is_file($this->json)) { // file already exists --> load it
-      $this->media = FileFunctions::jsonToArray($this->json);
-      $this->index = count($this->media)-1;
-    } else {
-      $this->media = [];
-      $this->index = -1;
-      if (!is_dir(static::$jsonPath)) FileFunctions::createFolder(static::$jsonPath);
-    }
-
+  public function __construct ($album) {
+    $this->json = static::$jsonPath . $album->getId() . '.json';
+    $this->index = -1;
+    $this->loadMediaFromAlbum ($album->getPhotos(), $album->getPhotoFolder(), $album->getThumbnailFolder());
+    
+    if (!is_dir(static::$jsonPath)) FileFunctions::createFolder(static::$jsonPath);
   }
 
   public function addPhoto ($photoPath, $thumbnailPath = null, $bigPhotoPath = null, $title = null, $caption = null) {
@@ -35,7 +30,7 @@ class Galleria {
     }
   }
 
-  public function save () {
+  public function persist () {
     FileFunctions::arrayToJson($this->media, $this->json);
   }
 
@@ -52,6 +47,18 @@ class Galleria {
     } else {
       $this->index++;
       return $this->index;
+    }
+  }
+
+  private function loadMediaFromAlbum($photoArray, $photoFolder, $thumbnailFolder) {
+    foreach ($photoArray as $photo) {
+      $i = $this->nextIndex();
+      $this->media[$i]['image'] = $photoFolder . $photo->getFileName();
+      $this->media[$i]['thumb'] = $thumbnailFolder . $photo->getFileName();
+      // TODO: $this->media[$i]['big'] = ;
+      // TODO: $this->media[$i]['title'] = ;
+      if (!empty($photo->getCaption()))
+        $this->media[$i]['description'] = $photo->getCaption();
     }
   }
 
