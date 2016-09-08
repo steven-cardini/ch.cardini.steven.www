@@ -43,6 +43,10 @@
       ?>
 
       <form class="form-horizontal js-feedback-form" role="form" method="post" action="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']); ?>">
+        <div class="form-group">
+          <div class="col-sm-1"></div>
+          <button type="submit" class="btn btn-default" name="submitted">Update Photos</button>
+        </div>        <br />
         <div class="thumbnail-table">
           <?php
           foreach ($photos as $photo) {
@@ -56,7 +60,7 @@
           }
           ?>
          </div> <!-- end div.thumbnail-table --> 
-        
-          <button type="submit" class="btn btn-default" name="submitted">Update Photos</button>
 
+         
+        
       </form>
