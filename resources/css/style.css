@@ -28,6 +28,25 @@ div.thumbnail-table div {
   width:  100%;
 }
 
+div.galleria div.galleria-info {
+  display: block;
+  position: absolute;
+  left: calc(50% - 150px);
+  top: 30px;
+  /* width: calc(100% - 120px); */
+  width: 300px;
+  visibility: visible;
+}
+
+div.galleria div.galleria-info div.galleria-info-text, div.galleria div.galleria-info div.galleria-info-close {
+  background-color: rgba(0,0,0,0.4);
+  display: block;
+}
+
+div.galleria div.galleria-info div.galleria-info-link {
+  background-color: rgba(0,0,0,0.4);
+  display: none;
+}
 
 
 
