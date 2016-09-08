@@ -1,6 +1,5 @@
-<!DOCTYPE html>
 <?php
-  session_start();
+  // TODO: is it necessary? session_start();
   // include constants
   require_once('resources/php/constants.php');
   // include classloader and register it to autoloading
@@ -9,13 +8,14 @@
   // start session and save client
   //TODO: require_once('lib/functions/client.register.php');
   // set content language
-  //TODO: I18n::initialize();
+  I18n::initialize();
   // TODO: load current page content and required JS files
   /* $currentPage = FileFunctions::getCurrentPage();
   $externalJS = JavaScriptIncluder::getExternalJSFiles($currentPage);
   $customJS = JavaScriptIncluder::getCustomJSFiles($currentPage); */
 ?>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="<?php echo I18n::getLang(); ?>">
 
 <head>
 
@@ -72,13 +72,13 @@
                         <a href="#page-top"></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#photos">Photos</a>
+                        <a class="page-scroll" href="#photos"><?php echo I18n::t("menu.photos"); ?></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#about">About</a>
+                        <a class="page-scroll" href="#about"><?php echo I18n::t("menu.about"); ?></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#contact">Contact</a>
+                        <a class="page-scroll" href="#contact"><?php echo I18n::t("menu.contact"); ?></a>
                     </li>
                 </ul>
             </div>
@@ -103,7 +103,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Photos</h2>
+                    <h2 class="section-heading"><?php echo I18n::t("menu.photos"); ?></h2>
                     <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
                 </div>
             </div>
@@ -145,7 +145,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">About</h2>
+                    <h2 class="section-heading"><?php echo I18n::t("menu.about"); ?></h2>
                     <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
                 </div>
             </div>
@@ -227,7 +227,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Contact Me</h2>
+                    <h2 class="section-heading"><?php echo I18n::t("menu.contact"); ?></h2>
                     <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
                 </div>
             </div>
