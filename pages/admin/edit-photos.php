@@ -26,7 +26,7 @@
       // validation is successful -> update album
       if (!isset($errorMessage)) {
         foreach ($_POST['photos'] as $fileName => $valueArray) {
-          $album->updatePhoto($fileName, $valueArray['caption']);
+          $album->updatePhoto($fileName, $valueArray['title'], $valueArray['caption']);
         }
         $album->generateGalleriaJson(); // generate the JSON file for Galleria.js
         MessageHandler::printSuccess("The album was updated.");
@@ -48,6 +48,8 @@
           foreach ($photos as $photo) {
             echo "<div class=\"col-md-3 col-sm-4 col-xs-6\">";
               echo "<img src=\"{$album->getThumbnailFolder()}{$photo->getFileName()}\" />";
+              echo "<br /> <label for=\"photos[{$photo->getFileName()}][title]\" class=\"control-label col-sm-2\">Title</label>";
+              echo "<input type=\"text\" class=\"form-control\" id=\"photos[{$photo->getFileName()}][title]\" name=\"photos[{$photo->getFileName()}][title]\"  value=\"{$photo->getTitle()}\" />";
               echo "<br /> <label for=\"photos[{$photo->getFileName()}][caption]\" class=\"control-label col-sm-2\">Caption</label>";
               echo "<textarea class=\"form-control\" id=\"photos[{$photo->getFileName()}][caption]\" name=\"photos[{$photo->getFileName()}][caption]\" rows=\"3\">{$photo->getCaption()}</textarea>'";
             echo "</div>";

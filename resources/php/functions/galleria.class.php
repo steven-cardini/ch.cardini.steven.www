@@ -56,7 +56,8 @@ class Galleria {
       $this->media[$i]['image'] = $photoFolder . $photo->getFileName();
       $this->media[$i]['thumb'] = $thumbnailFolder . $photo->getFileName();
       // TODO: $this->media[$i]['big'] = ;
-      // TODO: $this->media[$i]['title'] = ;
+      if (!empty($photo->getTitle()))
+        $this->media[$i]['title'] = $photo->getTitle();
       if (!empty($photo->getCaption()))
         $this->media[$i]['description'] = $photo->getCaption();
     }
