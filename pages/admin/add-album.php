@@ -8,7 +8,7 @@
     try {
 
       // ensure that user filled out all compulsory fields
-      if (empty($_POST['album-date']) || empty($_POST['album-title']) || empty($_POST['album-caption'])) {
+      if (empty($_POST['album-date']) || empty($_POST['album-titles']) || empty($_POST['album-captions'])) {
         throw new Exception ('You must fill out all fields!');
       }
 
@@ -19,7 +19,7 @@
     // validation is successful -> add album
     if (!isset($errorMessage)) {
       $albumCatalog = PhotoAlbumCatalog::getInstance();
-      $albumCatalog->addAlbum($_POST['album-date'], $_POST['album-title'], $_POST['album-caption']);
+      $albumCatalog->addAlbum($_POST['album-date'], $_POST['album-titles'], $_POST['album-captions']);
       MessageHandler::printSuccess("The album was created.");
     }
 
@@ -41,17 +41,31 @@
       </div>
     </div>
 
-    <div class="form-group album-title">
-      <label for="album-title" class="control-label col-sm-2">Title</label>
+    <div class="form-group album-title-en">
+      <label for="album-titles[en]" class="control-label col-sm-2">Title (English)</label>
       <div class="col-sm-6">
-        <input type="text" required="required" class="form-control" id="album-title" name="album-title" />
+        <input type="text" required="required" class="form-control" id="album-titles[en]" name="album-titles[en]" />
       </div>
     </div>
 
-    <div class="form-group album-caption">
-      <label for="album-caption" class="control-label col-sm-2">Caption</label>
+    <div class="form-group album-caption-en">
+      <label for="album-captions[en]" class="control-label col-sm-2">Caption (English)</label>
       <div class="col-sm-6">
-        <textarea required="required" class="form-control" id="album-caption" name="album-caption" rows="6" ></textarea>
+        <textarea required="required" class="form-control" id="album-captions[en]" name="album-captions[en]" rows="6" ></textarea>
+      </div>
+    </div>
+
+    <div class="form-group album-title-de">
+      <label for="album-titles[de]" class="control-label col-sm-2">Title (Deutsch)</label>
+      <div class="col-sm-6">
+        <input type="text" required="required" class="form-control" id="album-titles[de]" name="album-titles[de]" />
+      </div>
+    </div>
+
+    <div class="form-group album-caption-de">
+      <label for="album-captions[de]" class="control-label col-sm-2">Caption (Deutsch)</label>
+      <div class="col-sm-6">
+        <textarea required="required" class="form-control" id="album-captions[de]" name="album-captions[de]" rows="6" ></textarea>
       </div>
     </div>
 

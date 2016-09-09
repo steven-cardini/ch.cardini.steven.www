@@ -34,17 +34,17 @@ class PhotoAlbumCatalog {
     return $this->albums[$id];
   }
 
-  public function addAlbum($date, $title, $caption) {
+  public function addAlbum($date, $titles, $captions) {
     if (!$this->albumsAreLoaded) $this->loadAlbums(); // load albums if necessary
     $id = $this->generateId();
     $created = date('Y-m-d H:i:s');
-    $this->setArrayElement($id, $created, $date, $title, $caption, "");
+    $this->setArrayElement($id, $created, $date, $titles, $captions, "");
   }
 
-  public function updateAlbum($id, $date, $title, $caption, $frontPhoto="") {
+  public function updateAlbum($id, $date, $titles, $captions, $frontPhoto="") {
     if (!$this->albumsAreLoaded) $this->loadAlbums(); // load albums if necessary
     $created = $this->albums[$id]->getCreationDate();
-    $this->setArrayElement($id, $created, $date, $title, $caption, $frontPhoto);
+    $this->setArrayElement($id, $created, $date, $titles, $captions, $frontPhoto);
   }
 
 
@@ -60,8 +60,8 @@ class PhotoAlbumCatalog {
     return $id;
   }
 
-  private function setArrayElement($id, $dateCreated, $dateAlbum, $title, $caption, $frontPhoto) {
-    $albumArray = array ("id" => "$id", "date-created" => "$dateCreated" , "date-album" => "$dateAlbum", "title" => "$title", "caption" => "$caption", "front-photo" => "$frontPhoto");
+  private function setArrayElement($id, $dateCreated, $dateAlbum, $titles, $captions, $frontPhoto) {
+    $albumArray = array ("id" => "$id", "date-created" => "$dateCreated" , "date-album" => "$dateAlbum", "titles" => array("en"=>$titles["en"], "de"=>$titles["de"]), "captions" => array("en"=>$captions["en"], "de"=>$captions["de"]), "front-photo" => "$frontPhoto");
     $album = new PhotoAlbum($albumArray);
     $this->albums[$id] = $album;
     $this->saveAlbums();

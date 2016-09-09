@@ -4,15 +4,15 @@ class Photo implements JsonSerializable {
   private $fileName;
   private $uploadDate;
   private $captureDate;
-  private $title;
-  private $caption;
+  private $titles = []; // I18n
+  private $captions = []; // I18n
 
   public function __construct(array $array) {
     $this->fileName = $array['file-name'];
     $this->uploadDate = $array['date-uploaded'];
     $this->captureDate = $array['date-captured'];
-    $this->title = $array['title'];
-    $this->caption = $array['caption'];
+    $this->titles = $array['titles'];
+    $this->captions = $array['captions'];
   }
 
   public function getFileName() {
@@ -27,20 +27,28 @@ class Photo implements JsonSerializable {
     return $this->captureDate;
   }
 
-  public function getTitle() {
-    return $this->title;
+  public function getTitle($lang=null) {
+    if (!isset($lang)) {
+      return $this->titles[I18n::getLang()];
+    } else {
+      return $this->titles[ (I18n::exists($lang) ? $lang : I18n::defaultLang()) ];
+    }
   }
 
-  public function getCaption() {
-    return $this->caption;
+  public function getCaption($lang=null) {
+    if (!isset($lang)) {
+      return $this->captions[I18n::getLang()];
+    } else {
+      return $this->captions[ (I18n::exists($lang) ? $lang : I18n::defaultLang()) ];
+    }
   }
 
   public function jsonSerialize() {
     $array = [];
     $array['date-uploaded'] = $this->uploadDate;
     $array['date-captured'] = $this->captureDate;
-    $array['title'] = $this->title;
-    $array['caption'] = $this->caption;
+    $array['titles'] = $this->titles;
+    $array['captions'] = $this->captions;
     
     return $array;
   }

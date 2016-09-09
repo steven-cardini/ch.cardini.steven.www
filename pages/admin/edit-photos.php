@@ -26,7 +26,7 @@
       // validation is successful -> update album
       if (!isset($errorMessage)) {
         foreach ($_POST['photos'] as $fileName => $valueArray) {
-          $album->updatePhoto($fileName, $valueArray['title'], $valueArray['caption']);
+          $album->updatePhoto($fileName, $valueArray['titles'], $valueArray['captions']);
         }
         $album->generateGalleriaJson(); // generate the JSON file for Galleria.js
         MessageHandler::printSuccess("The album was updated.");
@@ -52,10 +52,17 @@
           foreach ($photos as $photo) {
             echo "<div class=\"col-md-3 col-sm-4 col-xs-6\">";
               echo "<img src=\"{$album->getThumbnailFolder()}{$photo->getFileName()}\" />";
-              echo "<br /> <label for=\"photos[{$photo->getFileName()}][title]\" class=\"control-label col-sm-2\">Title</label>";
-              echo "<input type=\"text\" class=\"form-control\" id=\"photos[{$photo->getFileName()}][title]\" name=\"photos[{$photo->getFileName()}][title]\"  value=\"{$photo->getTitle()}\" />";
-              echo "<br /> <label for=\"photos[{$photo->getFileName()}][caption]\" class=\"control-label col-sm-2\">Caption</label>";
-              echo "<textarea class=\"form-control\" id=\"photos[{$photo->getFileName()}][caption]\" name=\"photos[{$photo->getFileName()}][caption]\" rows=\"3\">{$photo->getCaption()}</textarea>'";
+              
+              echo "<br /> <label for=\"photos[{$photo->getFileName()}][titles][en]\" class=\"control-label col-sm-2\">Title (English)</label>";
+              echo "<input type=\"text\" class=\"form-control\" id=\"photos[{$photo->getFileName()}][titles][en]\" name=\"photos[{$photo->getFileName()}][titles][en]\"  value=\"{$photo->getTitle("en")}\" />";
+              echo "<br /> <label for=\"photos[{$photo->getFileName()}][captions][en]\" class=\"control-label col-sm-2\">Caption (English)</label>";
+              echo "<textarea class=\"form-control\" id=\"photos[{$photo->getFileName()}][captions][en]\" name=\"photos[{$photo->getFileName()}][captions][en]\" rows=\"2\">{$photo->getCaption("en")}</textarea>'";
+              
+              echo "<br /> <label for=\"photos[{$photo->getFileName()}][titles][de]\" class=\"control-label col-sm-2\">Title (Deutsch)</label>";
+              echo "<input type=\"text\" class=\"form-control\" id=\"photos[{$photo->getFileName()}][titles][de]\" name=\"photos[{$photo->getFileName()}][titles][de]\"  value=\"{$photo->getTitle("de")}\" />";
+              echo "<br /> <label for=\"photos[{$photo->getFileName()}][captions][de]\" class=\"control-label col-sm-2\">Caption (Deutsch)</label>";
+              echo "<textarea class=\"form-control\" id=\"photos[{$photo->getFileName()}][captions][de]\" name=\"photos[{$photo->getFileName()}][captions][de]\" rows=\"2\">{$photo->getCaption("de")}</textarea>'";
+            
             echo "</div>";
           }
           ?>

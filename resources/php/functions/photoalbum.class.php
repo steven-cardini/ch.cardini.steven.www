@@ -4,8 +4,8 @@ class PhotoAlbum implements JsonSerializable {
   private $id;
   private $creationDate;
   private $albumDate;
-  private $title;
-  private $caption;
+  private $titles = []; //I18n
+  private $captions = []; // I18n
   private $frontPhoto;
 
   private $json;
@@ -19,8 +19,8 @@ class PhotoAlbum implements JsonSerializable {
     $this->id = $array['id'];
     $this->creationDate = $array['date-created'];
     $this->albumDate = $array['date-album'];
-    $this->title = $array['title'];
-    $this->caption = $array['caption'];
+    $this->titles = $array['titles'];
+    $this->captions = $array['captions'];
     $this->frontPhoto = $array['front-photo'];
 
     // initialize JSON file
@@ -57,12 +57,20 @@ class PhotoAlbum implements JsonSerializable {
     return $this->albumDate;
   }
 
-  public function getTitle() {
-    return $this->title;
+  public function getTitle($lang=null) {
+    if (!isset($lang)) {
+      return $this->titles[I18n::getLang()];
+    } else {
+      return $this->titles[ (I18n::exists($lang) ? $lang : I18n::defaultLang()) ];
+    }
   }
 
-  public function getCaption() {
-    return $this->caption;
+  public function getCaption($lang=null) {
+    if (!isset($lang)) {
+      return $this->captions[I18n::getLang()];
+    } else {
+      return $this->captions[ (I18n::exists($lang) ? $lang : I18n::defaultLang()) ];
+    }
   }
 
   public function getFrontPhoto() {
@@ -91,17 +99,17 @@ class PhotoAlbum implements JsonSerializable {
     }
   }
 
-  public function addPhoto($fileName, $dateCaptured, $title = "", $caption = "") {
+  public function addPhoto($fileName, $dateCaptured, $titles = null, $captions = null) {
     if (!$this->photosAreLoaded) $this->loadPhotos(); // load photos if necessary
     $dateUploaded = date('Y-m-d H:i:s');
-    $this->setArrayElement ($fileName, $dateUploaded, $dateCaptured, $title, $caption);
+    $this->setArrayElement ($fileName, $dateUploaded, $dateCaptured, $titles, $captions);
   }
 
-  public function updatePhoto ($fileName, $title, $caption) {
+  public function updatePhoto ($fileName, $titles, $captions) {
     if (!$this->photosAreLoaded) $this->loadPhotos(); // load photos if necessary
     $dateUploaded = $this->photos[$fileName]->getUploadDate();
     $dateCaptured = $this->photos[$fileName]->getCaptureDate();
-    $this->setArrayElement ($fileName, $dateUploaded, $dateCaptured, $title, $caption);
+    $this->setArrayElement ($fileName, $dateUploaded, $dateCaptured, $titles, $captions);
   }
 
   public function generateGalleriaJson () {
@@ -113,8 +121,8 @@ class PhotoAlbum implements JsonSerializable {
     $array = [];
     $array['date-created'] = $this->creationDate;
     $array['date-album'] = $this->albumDate;
-    $array['title'] = $this->title;
-    $array['caption'] = $this->caption;
+    $array['titles'] = $this->titles;
+    $array['captions'] = $this->captions;
     $array['front-photo'] = $this->frontPhoto;
     
     return $array;
@@ -131,8 +139,13 @@ class PhotoAlbum implements JsonSerializable {
     FileFunctions::createFolder($dir);
   }
 
-  private function setArrayElement ($fileName, $dateUploaded, $dateCaptured, $title, $caption) {
-    $photoArray = array ("file-name" => "$fileName", "date-uploaded" => "$dateUploaded" , "date-captured" => "$dateCaptured", "title" => "$title", "caption" => "$caption");
+  private function setArrayElement ($fileName, $dateUploaded, $dateCaptured, $titles, $captions) {
+    if (!isset($titles))
+      $titles = array("en"=>"", "de"=>"");
+    if (!isset($captions))
+      $captions = array("en"=>"", "de"=>"");
+    
+    $photoArray = array ("file-name" => "$fileName", "date-uploaded" => "$dateUploaded" , "date-captured" => "$dateCaptured", "titles" => array("en"=>$titles["en"], "de"=>$titles["de"]), "captions" => array("de"=>$captions["de"], "en"=>$captions["en"]));
     $photo = new Photo($photoArray);
     $this->photos[$fileName] = $photo;
     $this->persistPhotos();
