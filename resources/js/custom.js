@@ -1,3 +1,15 @@
+// Set up language
+var lang = $('html').attr('lang');
+switch (lang) {
+  case "de":
+    $("#language-active").html("Deutsch");
+    break;
+  default:
+    $("#language-active").html("English");
+    break;
+}
+
+
 // Set up Galleria
 
 Galleria.loadTheme("resources/vendor/galleria/themes/classic/galleria.classic.js");

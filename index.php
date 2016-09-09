@@ -285,7 +285,18 @@
                 </div>
                 <div class="col-md-4">
                     <ul class="list-inline quicklinks">
-                        <li><a href="#">Impressum</a>
+                        <li>
+                          <a href="#">Impressum</a>
+                        </li>
+                        <li>|</li>
+                        <li class="dropup">
+                          <a id="language-active" class="dropdown-toggle" data-toggle="dropdown" href="#"><?php echo I18n::t("menu.language"); ?>
+                          <span class="caret"></span></a>
+                          <ul class="dropdown-menu">
+                            <li class="dropdown-header"><?php echo I18n::t("menu.language"); ?></li>
+                            <li><a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "?" . I18n::getNewQueryString($_SERVER['QUERY_STRING'], "en"); ?>">English</a></li>
+                            <li><a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "?" . I18n::getNewQueryString($_SERVER['QUERY_STRING'], "de"); ?>">Deutsch</a></li>
+                          </ul>
                         </li>
                     </ul>
                 </div>

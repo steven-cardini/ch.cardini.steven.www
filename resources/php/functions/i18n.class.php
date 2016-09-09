@@ -18,11 +18,26 @@
 
     static function initialize () {
       $lang = $_GET['lang'] ?? $_COOKIE['lang'] ?? substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
-      if (!in_array($lang, static::$acceptedLang)) $lang = $acceptedLang[0]; // English is default language
+      if (!in_array($lang, static::$acceptedLang)) $lang = static::$acceptedLang[0]; // English is default language
       static::$lang = $lang;
       
       static::$textArray = FileFunctions::jsonToArray(static::$jsonPath . "lang-$lang.json");
       setcookie('lang', $lang); // generate or update language cookie
+    }
+
+    static function getNewQueryString ($queryString, $lang) {
+      $newQueryString = "";
+      parse_str($_SERVER['QUERY_STRING'], $vars);
+      $setAmpersand = false;
+      foreach ($vars as $key => $value) {
+        if ($key === "lang") continue;
+        if ($setAmpersand) $newQueryString .= "&";
+        $newQueryString .= "$key=$value";
+        $setAmpersand = true;
+      }
+      if ($setAmpersand) $newQueryString .= "&";
+      $newQueryString .= "lang=$lang";
+      return $newQueryString;
     }
 
   }
