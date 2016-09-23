@@ -3,6 +3,10 @@ body {
   font-family: "Roboto Slab", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+body > section {
+  padding: 50px 0;
+}
+
 div.thumbnail-table div {
   margin-bottom: 15px;
 }
