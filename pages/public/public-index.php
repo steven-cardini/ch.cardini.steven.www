@@ -108,12 +108,7 @@
 
                     foreach ($photoAlbums as $photoAlbum) {
                         $item = '<div class="col-md-4 col-sm-6 photo-item">
-                                <a href="#photos-'.$photoAlbum->getId().'" class="photo-link" data-toggle="modal">
-                                <div class="photo-hover">
-                                    <div class="photo-hover-content">
-                                        <i class="fa fa-plus fa-3x"></i>
-                                    </div>
-                                </div>';
+                                <a href="#photos-'.$photoAlbum->getId().'" class="photo-link" data-toggle="modal">';
                       if (!empty($photoAlbum->getFrontPhoto())) {
                         $item .= '<img src="'.$photoAlbum->getPhotoFolder(true).$photoAlbum->getFrontPhoto().'" class="img-responsive" alt="">';
                       } else {
