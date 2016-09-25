@@ -23,9 +23,7 @@
       $lang = $_GET['lang'] ?? $_COOKIE['lang'] ?? substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
       if (!static::exists($lang)) $lang = static::defaultLang();
       static::$lang = $lang;
-      
       static::$textArray = FileFunctions::jsonToArray(static::$jsonPath . "lang-$lang.json");
-      setcookie('lang', $lang); // generate or update language cookie
       static::$initialized = true;
     }
 
@@ -37,19 +35,11 @@
       return static::$acceptedLang[0];
     }
 
-    static function getNewQueryString ($queryString, $lang) {
-      $newQueryString = "";
-      parse_str($_SERVER['QUERY_STRING'], $vars);
-      $setAmpersand = false;
-      foreach ($vars as $key => $value) {
-        if ($key === "lang") continue;
-        if ($setAmpersand) $newQueryString .= "&";
-        $newQueryString .= "$key=$value";
-        $setAmpersand = true;
-      }
-      if ($setAmpersand) $newQueryString .= "&";
-      $newQueryString .= "lang=$lang";
-      return $newQueryString;
+    static function getLangSwitchInfo () {
+      $newLang = (static::$lang === "en") ? "de" : "en";
+      $language = ($newLang === "en") ? "English" : "Deutsch";
+      $url = ROOT_DIR."/$newLang";
+      return array("lang" => $language, "url" => $url);
     }
 
   }

@@ -1,13 +1,16 @@
 // Set up language
 var lang = $('html').attr('lang');
-switch (lang) {
-  case "de":
-    $("#language-active").html("Deutsch");
-    break;
-  default:
-    $("#language-active").html("English");
-    break;
-}
+
+$(".switch-language").click(function () {
+  switch (lang) {
+    case "en":
+      document.cookie = "lang=de";
+      break;
+    default:
+      document.cookie = "lang=en";
+      break;
+  }
+});
 
 
 // Set up Galleria
@@ -20,7 +23,6 @@ $(".modal-photo").on("show.bs.modal", function (e) {
   var json = "resources/json/photo/galleria/" + albumId + "-" + lang + ".json";
 
   $.getJSON(json, function () {
-    console.log("success");
   })
 
     .done(function (data) {
@@ -33,7 +35,6 @@ $(".modal-photo").on("show.bs.modal", function (e) {
           });
         }
       });
-      console.log("second success");
     })
 
     .fail(function () {

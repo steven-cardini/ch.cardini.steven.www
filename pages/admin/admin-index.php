@@ -1,11 +1,9 @@
-<!DOCTYPE html>
 <?php
-// include constants
-require_once('resources/php/constants.php');
-// include classloader and register it to autoloading
-require_once('resources/php/classloader.php');
-spl_autoload_register('loadClass');
+  // include PHP configuration
+  require('../../resources/php/config.php');
+  
 ?>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -19,20 +17,20 @@ spl_autoload_register('loadClass');
     <title>Steven Cardini - Administration</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo ROOT_DIR; ?>/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="resources/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo ROOT_DIR; ?>/resources/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 
     <!-- Image Picker CSS -->
-    <link href="resources/vendor/image-picker/image-picker.css" rel="stylesheet">
+    <link href="<?php echo ROOT_DIR; ?>/resources/vendor/image-picker/image-picker.css" rel="stylesheet">
 
     <!-- Theme CSS -->
-    <link href="resources/css/style.css" rel="stylesheet">
+    <link href="<?php echo ROOT_DIR; ?>/resources/css/style.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -54,15 +52,15 @@ spl_autoload_register('loadClass');
   <li role="presentation" class="dropdown"> 
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Photos <span class="caret"></span> </a> 
     <ul class="dropdown-menu"> 
-      <li><a href="?action=list-albums">List Albums</a></li> 
-      <li><a href="?action=add-album">Add Album</a></li> 
+      <li><a href="<?php echo ROOT_DIR."/admin/"; ?>list-albums">List Albums</a></li> 
+      <li><a href="<?php echo ROOT_DIR."/admin/"; ?>add-album">Add Album</a></li> 
     </ul>
   </li>
 </ul>
 
 <?php
-if (isset($_GET['action']) && file_exists(PAGE_DIR."admin/{$_GET['action']}.php")) {
-  require_once(PAGE_DIR."admin/{$_GET['action']}.php");
+if (isset($_GET['action']) && file_exists($_SERVER["DOCUMENT_ROOT"].ROOT_DIR."/pages/admin/{$_GET['action']}.php")) {
+  require_once($_SERVER["DOCUMENT_ROOT"].ROOT_DIR."/pages/admin/{$_GET['action']}.php");
 } else {
   echo '<h1>Please choose the action</h1><p>Choose the administration action in the navigation above.</p>';
 }
@@ -71,13 +69,13 @@ if (isset($_GET['action']) && file_exists(PAGE_DIR."admin/{$_GET['action']}.php"
 </div> <!-- end container div -->
 
 <!-- jQuery -->
-<script src="resources/vendor/jquery/jquery.min.js"></script>
+<script src="<?php echo ROOT_DIR; ?>/resources/vendor/jquery/jquery.min.js"></script>
 
 <!-- Bootstrap Core JavaScript -->
-<script src="resources/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="<?php echo ROOT_DIR; ?>/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
 
 <!-- Image Picker JavaScript -->
-<script src="resources/vendor/image-picker/image-picker.min.js"></script>
+<script src="<?php echo ROOT_DIR; ?>/resources/vendor/image-picker/image-picker.min.js"></script>
 
 <script>
   $("#album-front-photo").imagepicker();

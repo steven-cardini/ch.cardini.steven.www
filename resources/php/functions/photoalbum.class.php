@@ -30,15 +30,21 @@ class PhotoAlbum implements JsonSerializable {
     }
 
     // initialize photo folder
-    $this->photoFolder = IMG_DIR."albums/$this->id/";
-    if (!is_dir($this->photoFolder)) {
-      $this->initializeDir($this->photoFolder);
+    $this->photoFolder = array (
+      "html" => "resources/img/albums/$this->id/",
+      "php" => IMG_DIR."albums/$this->id/"
+    );    
+    if (!is_dir($this->photoFolder['php'])) {
+      $this->initializeDir($this->photoFolder['php']);
     }
 
     // initialize thumbnails folder
-    $this->thumbnailFolder = IMG_DIR."albums/$this->id/thumbs/";
-    if (!is_dir($this->thumbnailFolder)) {
-      $this->initializeDir($this->thumbnailFolder);
+    $this->thumbnailFolder = array (
+      "html" => "resources/img/albums/$this->id/thumbs/",
+      "php" => IMG_DIR."albums/$this->id/thumbs/"
+    );
+    if (!is_dir($this->thumbnailFolder['php'])) {
+      $this->initializeDir($this->thumbnailFolder['php']);
     }
 
     // load photos only when required
@@ -77,12 +83,14 @@ class PhotoAlbum implements JsonSerializable {
     return $this->frontPhoto;
   }
 
-  public function getPhotoFolder() {
-    return $this->photoFolder;
+  public function getPhotoFolder($html=false) {
+    if ($html) return $this->photoFolder['html'];
+    else return $this->photoFolder['php'];
   }
 
-  public function getThumbnailFolder() {
-    return $this->thumbnailFolder;
+  public function getThumbnailFolder($html=false) {
+    if ($html) return $this->thumbnailFolder['html'];
+    else return $this->thumbnailFolder['php'];
   }
 
   public function getPhotos () {

@@ -1,0 +1,18 @@
+DirectoryIndex index.php
+IndexIgnore * [L]
+
+RewriteEngine on # Turn on the rewriting engine
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-l
+
+# Public access, I18n
+RewriteRule ^.*\/?(de|en)\/?$ pages/public/public-index.php?lang=$1 [L]
+
+# Private access, administration with specific action and id
+RewriteRule ^.*\/?admin\/([a-z-]+)\/([a-z0-9]+)\/?$ pages/admin/admin-index.php?action=$1&id=$2 [L]
+
+# Private access, administration with specific action
+RewriteRule ^.*\/?admin\/([a-z-]+)\/?$ pages/admin/admin-index.php?action=$1 [L]
+
+# Private access, administration home
+RewriteRule ^.*\/?admin\/?$ pages/admin/admin-index.php [L]

@@ -3,6 +3,7 @@
   <?php
   $albumCatalog = PhotoAlbumCatalog::getInstance();
   $photoAlbums = $albumCatalog->getAlbums();
+  $urlPrefix = ROOT_DIR."/admin";
   ?>
 
   <table class="table table-hover table-condensed">
@@ -21,9 +22,9 @@
     foreach ($photoAlbums as $photoAlbum) {
       echo "<tr><td>{$photoAlbum->getId()}</td>";
       echo "<td>{$photoAlbum->getTitle()}</td>";
-      echo "<td><a href=\"?action=edit-album&id={$photoAlbum->getId()}\">EDIT ALBUM</a></td>";
-      echo "<td><a href=\"?action=add-photos&id={$photoAlbum->getId()}\">ADD PHOTOS</a></td>";
-      echo "<td><a href=\"?action=edit-photos&id={$photoAlbum->getId()}\">EDIT PHOTOS</a></td></tr>";
+      echo "<td><a href=\"$urlPrefix/edit-album/{$photoAlbum->getId()}\">EDIT ALBUM</a></td>";
+      echo "<td><a href=\"$urlPrefix/add-photos/{$photoAlbum->getId()}\">ADD PHOTOS</a></td>";
+      echo "<td><a href=\"$urlPrefix/edit-photos/{$photoAlbum->getId()}\">EDIT PHOTOS</a></td></tr>";
     }
     ?>
     </tbody>

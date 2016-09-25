@@ -2,38 +2,27 @@
 
 class Galleria {
 
-  private static $jsonPath = JSON_DIR . 'photo/galleria/';
+  private static $jsonPath = array (
+    "html" => "resources/json/photo/galleria/",
+    "php" => JSON_DIR . "photo/galleria/"
+  );
   
   private $index;
   private $media = [];
-  private $json = [];
+  private $jsonId = [];
 
   public function __construct ($album) {
-    $this->json["en"] = static::$jsonPath . $album->getId() . '-en.json';
-    $this->json["de"] = static::$jsonPath . $album->getId() . '-de.json';
+    $this->jsonId = array (
+      "en" => $album->getId() . '-en.json',
+      "de" => $album->getId() . '-de.json'
+    );
     $this->index = -1;
-    $this->loadMediaFromAlbum ($album->getPhotos(), $album->getPhotoFolder(), $album->getThumbnailFolder());
-    
-    if (!is_dir(static::$jsonPath)) FileFunctions::createFolder(static::$jsonPath);
+    $this->loadMediaFromAlbum ($album->getPhotos(), $album->getPhotoFolder(true), $album->getThumbnailFolder(true));
   }
 
-  /* public function addPhoto ($photoPath, $thumbnailPath = null, $bigPhotoPath = null, $title = null, $caption = null) {
-    $i = $this->nextIndex();
-    $this->media[$i]['image'] = $photoPath;
-    if (isset($thumbnailPath))
-      $this->media[$i]['thumb'] = $thumbnailPath;
-    if (isset($bigPhotoPath))
-      $this->media[$i]['big'] = $bigPhotoPath;
-    if (isset($title)) {
-      $this->media[$i]['title'] = $title;
-    if (isset($caption))
-      $this->media[$i]['description'] = $caption;
-    }
-  } */
-
   public function persist () {
-    FileFunctions::arrayToJson($this->media["en"], $this->json["en"]);
-    FileFunctions::arrayToJson($this->media["de"], $this->json["de"]);
+    FileFunctions::arrayToJson($this->media["en"], static::$jsonPath['php'].$this->jsonId["en"]);
+    FileFunctions::arrayToJson($this->media["de"], static::$jsonPath['php'].$this->jsonId["de"]);
   }
 
   public function clear () {
