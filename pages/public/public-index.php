@@ -267,7 +267,7 @@
                 <div class="col-md-4">
                     <ul class="list-inline quicklinks">
                         <li>
-                          <a href="#">Impressum</a>
+                          <a href="#impressum" data-toggle="modal"><?php echo I18n::t("impressum.title"); ?></a>
                         </li>
                         <li>|</li>
                         <li>
@@ -296,6 +296,26 @@
             echo $item;
         }
     ?>
+
+    <!-- Impressum Modal -->
+
+    <div id="impressum" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title"><?php echo I18n::t("impressum.title"); ?></h4>
+      </div>
+      <div class="modal-body">
+        <p><?php echo I18n::t("impressum.body"); ?></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo I18n::t("buttons.close"); ?></button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 
     <!-- jQuery -->
     <script src="resources/vendor/jquery/jquery.min.js"></script>
