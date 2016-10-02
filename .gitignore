@@ -7,7 +7,7 @@ Thumbs.db
 *.docx
 *.zip
 *.pdf
-*.config.php
+*.private.php
 /bower_components
 /node_modules
 /doc/

@@ -12,6 +12,24 @@ $(".switch-language").click(function () {
   }
 });
 
+function getError (key) {
+    if (lang === "de") {
+      switch (key) {
+        case "email.invalid":
+          return "Ungültige E-Mail-Adresse";
+        default:
+          return "Unbestimmbarer Fehler";
+      }
+    } else {
+      switch (key) {
+        case "email.invalid":
+          return "Not a valid email address";
+        default:
+          return "Undefined Error";
+      }
+    }
+  }
+
 
 // Set up Galleria
 
