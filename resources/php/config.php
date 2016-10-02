@@ -4,9 +4,9 @@
 ////////////////////
 
 define ("PHP_ROOT", substr (__DIR__, 0, strPos(__DIR__, "resources")));
-define ("HTML_ROOT", "http://" . $_SERVER["HTTP_HOST"] . substr ($_SERVER["PHP_SELF"], 0, strPos($_SERVER["PHP_SELF"], "pages")));
+define ("HTML_ROOT", substr ($_SERVER["PHP_SELF"], 0, strPos($_SERVER["PHP_SELF"], "pages")));
 
-function getAbsDir ($key, $html=false) {
+function absPath ($key, $html=false) {
   $root = $html ? HTML_ROOT : PHP_ROOT;
   $sep = $html ? "/" : DIRECTORY_SEPARATOR;
   
@@ -45,9 +45,9 @@ function getAbsDir ($key, $html=false) {
 //////////////////
 
 // include non-public configuration (constants etc.)
-require_once (getAbsDir("PHP").'config.private.php');
+require_once (absPath("PHP").'config.private.php');
 
 // initialize the class loader for all pages
 // and register the autoloader function
-require (getAbsDir("PHP").'classloader.php');
+require (absPath("PHP").'classloader.php');
 spl_autoload_register('loadClass');

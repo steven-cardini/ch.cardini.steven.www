@@ -11,8 +11,8 @@ class Galleria {
   public function __construct ($album) {
     if (empty(static::$jsonPath)) {
       static::$jsonPath = array (
-        "html" => getAbsDir("JSON", true) . "photo/galleria/",
-        "php" => getAbsDir("JSON") . "photo/galleria/"
+        "html" => absPath("JSON", true) . "photo/galleria/",
+        "php" => absPath("JSON") . "photo/galleria/"
       );
     }
     $this->jsonId = array (

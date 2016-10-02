@@ -2,7 +2,7 @@
 // include PHP configuration
 require_once('../config.php');
 // include ReCaptcha PHP
-require_once(getAbsDir("PHP_EXT") . "autoload.php");
+require_once(absPath("PHP_EXT") . "autoload.php");
 use \ReCaptcha\ReCaptcha;
 
 // Validate user input fields

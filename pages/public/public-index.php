@@ -22,20 +22,20 @@
     <title>Steven Cardini</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="<?php echo getAbsDir("RES", true); ?>vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo absPath("RES", true); ?>vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="<?php echo getAbsDir("RES", true); ?>vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo absPath("RES", true); ?>vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 
     <!-- Galleria Theme CSS -->
-    <link type="text/css" rel="stylesheet" href="<?php echo getAbsDir("RES", true); ?>vendor/galleria/themes/classic/galleria.classic.css">
+    <link type="text/css" rel="stylesheet" href="<?php echo absPath("RES", true); ?>vendor/galleria/themes/classic/galleria.classic.css">
     
     <!-- Theme CSS -->
-    <link href="<?php echo getAbsDir("CSS", true); ?>style.css" rel="stylesheet">
+    <link href="<?php echo absPath("CSS", true); ?>style.css" rel="stylesheet">
 
     <!-- ReCaptcha JavaScript -->
     <script src='https://www.google.com/recaptcha/api.js'></script>
@@ -321,26 +321,26 @@
 
 
     <!-- jQuery -->
-    <script src="<?php echo getAbsDir("RES", true); ?>vendor/jquery/jquery.min.js"></script>
+    <script src="<?php echo absPath("RES", true); ?>vendor/jquery/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="<?php echo getAbsDir("RES", true); ?>vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="<?php echo absPath("RES", true); ?>vendor/bootstrap/js/bootstrap.min.js"></script>
 
     <!-- Plugin JavaScript -->
-    <script src="<?php echo getAbsDir("RES", true); ?>vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="<?php echo absPath("RES", true); ?>vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Galleria JavaScript -->
-    <script src="<?php echo getAbsDir("RES", true); ?>vendor/galleria/galleria-1.4.2.js"></script>
+    <script src="<?php echo absPath("RES", true); ?>vendor/galleria/galleria-1.4.2.js"></script>
 
     <!-- Theme JavaScript -->
-    <script src="<?php echo getAbsDir("JS", true); ?>agency.min.js"></script>
+    <script src="<?php echo absPath("JS", true); ?>agency.min.js"></script>
 
     <!-- Custom JavaScript -->
-    <script src="<?php echo getAbsDir("JS", true); ?>custom.js"></script>
+    <script src="<?php echo absPath("JS", true); ?>custom.js"></script>
 
     <!-- Contact Form JavaScript -->
-    <script src="<?php echo getAbsDir("JS", true); ?>jqBootstrapValidation.js"></script>
-    <script src="<?php echo getAbsDir("JS", true); ?>contact_me.js"></script>
+    <script src="<?php echo absPath("JS", true); ?>jqBootstrapValidation.js"></script>
+    <script src="<?php echo absPath("JS", true); ?>contact_me.js"></script>
     
 </body>
 

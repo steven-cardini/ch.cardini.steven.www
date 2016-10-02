@@ -19,7 +19,7 @@ class PhotoAlbumCatalog {
 
   public static function getInstance () {
     if (static::$instance === null) {
-      static::$json = getAbsDir("JSON") . "photo/albums.json";
+      static::$json = absPath("JSON") . "photo/albums.json";
       static::$instance = new PhotoAlbumCatalog();
     }
     return static::$instance;

@@ -20,7 +20,7 @@
     }
 
     static function initialize () {
-      static::$jsonPath = getAbsDir("JSON") . "lang/";
+      static::$jsonPath = absPath("JSON") . "lang/";
 
       $lang = $_GET['lang'] ?? $_COOKIE['lang'] ?? substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
       if (!static::exists($lang)) $lang = static::defaultLang();

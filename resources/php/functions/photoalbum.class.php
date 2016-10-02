@@ -24,15 +24,15 @@ class PhotoAlbum implements JsonSerializable {
     $this->frontPhoto = $array['front-photo'];
 
     // initialize JSON file
-    $this->json = getAbsDir("JSON") . "photo/backup/$this->id.json";
+    $this->json = absPath("JSON") . "photo/backup/$this->id.json";
     if (!file_exists ($this->json)) {
       $this->initializeJson();
     }
 
     // initialize photo folder
     $this->photoFolder = array (
-      "html" => getAbsDir("IMG", true) . "albums/$this->id/",
-      "php" => getAbsDir("IMG") . "albums/$this->id/"
+      "html" => absPath("IMG", true) . "albums/$this->id/",
+      "php" => absPath("IMG") . "albums/$this->id/"
     );    
     if (!is_dir($this->photoFolder['php'])) {
       $this->initializeDir($this->photoFolder['php']);
@@ -40,8 +40,8 @@ class PhotoAlbum implements JsonSerializable {
 
     // initialize thumbnails folder
     $this->thumbnailFolder = array (
-      "html" => getAbsDir("IMG", true) . "albums/$this->id/thumbs/",
-      "php" => getAbsDir("IMG") . "albums/$this->id/thumbs/"
+      "html" => absPath("IMG", true) . "albums/$this->id/thumbs/",
+      "php" => absPath("IMG") . "albums/$this->id/thumbs/"
     );
     if (!is_dir($this->thumbnailFolder['php'])) {
       $this->initializeDir($this->thumbnailFolder['php']);

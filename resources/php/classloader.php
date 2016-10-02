@@ -4,7 +4,7 @@ function loadClass ($className) {
   $className = strtolower($className);
 
   $dirs = [
-    getAbsDir("PHP_FUNC"),
+    absPath("PHP_FUNC"),
   ];
 
   //try to load class
