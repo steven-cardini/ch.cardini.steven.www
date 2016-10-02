@@ -51,7 +51,7 @@
           <?php
           foreach ($photos as $photo) {
             echo "<div class=\"col-md-3 col-sm-4 col-xs-6\">";
-              echo "<img src=\"{$album->getThumbnailFolder()}{$photo->getFileName()}\" />";
+              echo "<img src=\"{$album->getThumbnailFolder(true)}{$photo->getFileName()}\" />";
               
               echo "<br /> <label for=\"photos[{$photo->getFileName()}][titles][en]\" class=\"control-label col-sm-2\">Title (English)</label>";
               echo "<input type=\"text\" class=\"form-control\" id=\"photos[{$photo->getFileName()}][titles][en]\" name=\"photos[{$photo->getFileName()}][titles][en]\"  value=\"{$photo->getTitle("en")}\" />";

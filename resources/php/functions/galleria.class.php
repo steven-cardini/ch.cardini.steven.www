@@ -2,16 +2,19 @@
 
 class Galleria {
 
-  private static $jsonPath = array (
-    "html" => "resources/json/photo/galleria/",
-    "php" => getAbsDir("JSON") . "photo/galleria/"
-  );
+  private static $jsonPath; // initialized upon first construction of object
   
   private $index;
   private $media = [];
   private $jsonId = [];
 
   public function __construct ($album) {
+    if (empty(static::$jsonPath)) {
+      static::$jsonPath = array (
+        "html" => getAbsDir("JSON", true) . "photo/galleria/",
+        "php" => getAbsDir("JSON") . "photo/galleria/"
+      );
+    }
     $this->jsonId = array (
       "en" => $album->getId() . '-en.json',
       "de" => $album->getId() . '-de.json'

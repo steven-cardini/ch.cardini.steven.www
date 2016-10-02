@@ -3,7 +3,7 @@
   <?php
   $albumCatalog = PhotoAlbumCatalog::getInstance();
   $photoAlbums = $albumCatalog->getAlbums();
-  $urlPrefix = ROOT_DIR."/admin";
+  $urlPrefix = HTML_ROOT."/admin";
   ?>
 
   <table class="table table-hover table-condensed">

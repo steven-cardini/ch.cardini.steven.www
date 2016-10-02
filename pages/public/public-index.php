@@ -2,7 +2,7 @@
   //TODO: register client, start session (?)
 
   // include PHP configuration
-  require('../../resources/php/config.php');
+  require_once('../../resources/php/config.php');
 
   // set content language
   I18n::initialize();

@@ -2,7 +2,7 @@
 
 class FileFunctions {
 
-  private static $logFile = "output.log";
+  private static $logFile = PHP_ROOT . "output.log";
 
   // INPUT: parent directory inclusive trailing "/"
   static function getSubFolders ($rootDir) {

@@ -96,9 +96,9 @@
               echo '<option value=""></option>'; // empty option to avoid default chosing first image
               foreach ($photos as $photo) {
                 if (!empty($album->getFrontPhoto()) && $album->getFrontPhoto() === $photo->getFileName()) { // current photo is front photo
-                  echo '<option value="'.$photo->getFileName().'" data-img-src="'.$album->getThumbnailFolder().$photo->getFileName().'" selected>'.$photo->getFileName().'</option>';
+                  echo '<option value="'.$photo->getFileName().'" data-img-src="'.$album->getThumbnailFolder(true).$photo->getFileName().'" selected>'.$photo->getFileName().'</option>';
                 } else { // current photo is not front photo
-                  echo '<option value="'.$photo->getFileName().'" data-img-src="'.$album->getThumbnailFolder().$photo->getFileName().'">'.$photo->getFileName().'</option>';
+                  echo '<option value="'.$photo->getFileName().'" data-img-src="'.$album->getThumbnailFolder(true).$photo->getFileName().'">'.$photo->getFileName().'</option>';
                 }
               } // end foreach
               ?>

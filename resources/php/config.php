@@ -32,6 +32,8 @@ function getAbsDir ($key, $html=false) {
     // PHP subfolders
     case "PHP_API":
       return $php . "api" . $sep;
+    case "PHP_EXT":
+      return $php . "vendor" . $sep;
     case "PHP_FUNC":
       return $php . "functions" . $sep;
   }

@@ -31,7 +31,7 @@ class PhotoAlbum implements JsonSerializable {
 
     // initialize photo folder
     $this->photoFolder = array (
-      "html" => "resources/img/albums/$this->id/",
+      "html" => getAbsDir("IMG", true) . "albums/$this->id/",
       "php" => getAbsDir("IMG") . "albums/$this->id/"
     );    
     if (!is_dir($this->photoFolder['php'])) {
@@ -40,7 +40,7 @@ class PhotoAlbum implements JsonSerializable {
 
     // initialize thumbnails folder
     $this->thumbnailFolder = array (
-      "html" => "resources/img/albums/$this->id/thumbs/",
+      "html" => getAbsDir("IMG", true) . "albums/$this->id/thumbs/",
       "php" => getAbsDir("IMG") . "albums/$this->id/thumbs/"
     );
     if (!is_dir($this->thumbnailFolder['php'])) {
