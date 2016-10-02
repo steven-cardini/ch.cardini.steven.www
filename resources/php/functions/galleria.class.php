@@ -4,7 +4,7 @@ class Galleria {
 
   private static $jsonPath = array (
     "html" => "resources/json/photo/galleria/",
-    "php" => JSON_DIR . "photo/galleria/"
+    "php" => getAbsDir("JSON") . "photo/galleria/"
   );
   
   private $index;

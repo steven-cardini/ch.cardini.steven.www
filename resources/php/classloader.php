@@ -4,11 +4,7 @@ function loadClass ($className) {
   $className = strtolower($className);
 
   $dirs = [
-    AUTH_DIR,
-    FUNCTIONS_DIR,
-    CONTROLLER_DIR,
-    MODEL_DIR,
-    VIEW_DIR
+    getAbsDir("PHP_FUNC"),
   ];
 
   //try to load class

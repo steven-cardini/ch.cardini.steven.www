@@ -3,51 +3,49 @@
 // PATH CONSTANTS //
 ////////////////////
 
-// root path - only use with HTML includes, not with PHP require_once!
-$root = $_SERVER['REQUEST_URI'];
-// remove admin string, if present
-$adminPos = strPos($root, '/admin');
-if ($adminPos > 0) $root = substr($root, 0, $adminPos);
-// remove language string, if present
-$langPos = strpos($root, '/de');
-if (!$langPos) $langPos = strpos($root, '/en');
-if ($langPos > 0) $root = substr($root, 0, $langPos);
+define ("PHP_ROOT", substr (__DIR__, 0, strPos(__DIR__, "resources")));
+define ("HTML_ROOT", "http://" . $_SERVER["HTTP_HOST"] . substr ($_SERVER["PHP_SELF"], 0, strPos($_SERVER["PHP_SELF"], "pages")));
 
-define("ROOT_DIR", $root);
+function getAbsDir ($key, $html=false) {
+  $root = $html ? HTML_ROOT : PHP_ROOT;
+  $sep = $html ? "/" : DIRECTORY_SEPARATOR;
+  
+  $res = $root . "resources" . $sep;
+  $php = $res . "php" . $sep;
 
-// determine prefix to root directory
-$subPath = substr($_SERVER['PHP_SELF'], strlen(ROOT_DIR));
-$subLevel = substr_count($subPath, "/")-1;
-$prefix = "";
-for ($i=0; $i<$subLevel; $i++) {
-  $prefix .= "../";
+  switch ($key) {
+    case "RES":
+      return $res;
+    case "PAGES":
+      return $root . "pages" . $sep;
+    // RES subfolders
+    case "CSS":
+      return $res . "css" . $sep;
+    case "IMG":
+      return $res . "img" . $sep;
+    case "JS":
+     return $res . "js" . $sep;
+    case "JSON":
+     return $res . "json" . $sep;
+    case "PHP":
+      return $php;
+    // PHP subfolders
+    case "PHP_API":
+      return $php . "api" . $sep;
+    case "PHP_FUNC":
+      return $php . "functions" . $sep;
+  }
 }
-
-// subdirectories - important for PHP includes and for HTML includes in combination with ROOT_DIR
-define ("RES_DIR", $prefix . "resources/");
-define ("PAGE_DIR", $prefix . "pages/");
-
-// RES subfolders
-define ("CSS_DIR", RES_DIR."css/");
-define ("IMG_DIR", RES_DIR."img/");
-define ("JS_DIR", RES_DIR."js/");
-define ("JSON_DIR", RES_DIR."json/");
-define ("PHP_DIR", RES_DIR."php/");
-define ("EXT_DIR", RES_DIR."vendor/");
-
-// PHP subfolders
-define ("AUTH_DIR", PHP_DIR."auth/");
-define ("FUNCTIONS_DIR", PHP_DIR."functions/");
-define ("CONTROLLER_DIR", PHP_DIR."controller/");
-define ("MODEL_DIR", PHP_DIR."model/");
-define ("VIEW_DIR", PHP_DIR."view/");
 
 
 //////////////////
 // CLASS LOADER //
 //////////////////
 
+// include non-public configuration (constants etc.)
+require_once (getAbsDir("PHP").'config.private.php');
+
 // initialize the class loader for all pages
 // and register the autoloader function
-require(PHP_DIR.'classloader.php');
+require (getAbsDir("PHP").'classloader.php');
 spl_autoload_register('loadClass');

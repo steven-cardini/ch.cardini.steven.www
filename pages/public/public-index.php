@@ -22,20 +22,23 @@
     <title>Steven Cardini</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo getAbsDir("RES", true); ?>vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="resources/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo getAbsDir("RES", true); ?>vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 
     <!-- Galleria Theme CSS -->
-    <link type="text/css" rel="stylesheet" href="resources/vendor/galleria/themes/classic/galleria.classic.css">
+    <link type="text/css" rel="stylesheet" href="<?php echo getAbsDir("RES", true); ?>vendor/galleria/themes/classic/galleria.classic.css">
     
     <!-- Theme CSS -->
-    <link href="resources/css/style.css" rel="stylesheet">
+    <link href="<?php echo getAbsDir("CSS", true); ?>style.css" rel="stylesheet">
+
+    <!-- ReCaptcha JavaScript -->
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -218,28 +221,28 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Your Name *" id="name" required data-validation-required-message="Please enter your name.">
-                                    <p class="help-block text-danger"></p>
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" class="form-control" placeholder="Your Email *" id="email" required data-validation-required-message="Please enter your email address.">
-                                    <p class="help-block text-danger"></p>
-                                </div>
-                                <div class="form-group">
-                                    <input type="tel" class="form-control" placeholder="Your Phone *" id="phone" required data-validation-required-message="Please enter your phone number.">
+                                    <textarea class="form-control" placeholder="<?php echo I18n::t("form.message.label"); ?>" id="message" required data-validation-required-message="<?php echo I18n::t("form.message.required"); ?>"></textarea>
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <textarea class="form-control" placeholder="Your Message *" id="message" required data-validation-required-message="Please enter a message."></textarea>
+                                    <input type="text" class="form-control" placeholder="<?php echo I18n::t("form.name.label"); ?>" id="name" required data-validation-required-message="<?php echo I18n::t("form.name.required"); ?>">
                                     <p class="help-block text-danger"></p>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control" placeholder="<?php echo I18n::t("form.email.label"); ?>" id="email" required data-validation-required-message="<?php echo I18n::t("form.email.required"); ?>">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                                <!-- TODO http://stackoverflow.com/questions/30647113/not-a-robot-recaptcha-without-a-form-but-ajax-instead -->
+                                <div class="form-group">
+                                    <div class="g-recaptcha" data-callback="recaptchaCallback" data-sitekey="6LcWJQgUAAAAAMVkati57u7CoHsdUooBFrqXBZgv"></div>
                                 </div>
                             </div>
                             <div class="clearfix"></div>
                             <div class="col-lg-12 text-center">
                                 <div id="success"></div>
-                                <button type="submit" class="btn btn-xl">Send Message</button>
+                                <button type="submit" class="btn btn-xl"><?php echo I18n::t("form.button.send"); ?></button>
                             </div>
                         </div>
                     </form>
@@ -318,26 +321,26 @@
 
 
     <!-- jQuery -->
-    <script src="resources/vendor/jquery/jquery.min.js"></script>
+    <script src="<?php echo getAbsDir("RES", true); ?>vendor/jquery/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="resources/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="<?php echo getAbsDir("RES", true); ?>vendor/bootstrap/js/bootstrap.min.js"></script>
 
     <!-- Plugin JavaScript -->
-    <script src="resources/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="<?php echo getAbsDir("RES", true); ?>vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Galleria JavaScript -->
-    <script src="resources/vendor/galleria/galleria-1.4.2.js"></script>
-
-    <!-- Contact Form JavaScript -->
-    <script src="resources/js/jqBootstrapValidation.js"></script>
-    <script src="resources/js/contact_me.js"></script>
+    <script src="<?php echo getAbsDir("RES", true); ?>vendor/galleria/galleria-1.4.2.js"></script>
 
     <!-- Theme JavaScript -->
-    <script src="resources/js/agency.min.js"></script>
+    <script src="<?php echo getAbsDir("JS", true); ?>agency.min.js"></script>
 
     <!-- Custom JavaScript -->
-    <script src="resources/js/custom.js"></script>
+    <script src="<?php echo getAbsDir("JS", true); ?>custom.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="<?php echo getAbsDir("JS", true); ?>jqBootstrapValidation.js"></script>
+    <script src="<?php echo getAbsDir("JS", true); ?>contact_me.js"></script>
     
 </body>
 

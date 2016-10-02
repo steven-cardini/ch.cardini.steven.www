@@ -3,7 +3,7 @@
   class I18n {
 
     private static $initialized = false;
-    private static $jsonPath = JSON_DIR . 'lang/';
+    private static $jsonPath; // initialized in initialize-method below
 
     private static $acceptedLang = array ("en", "de");
     private static $lang;
@@ -20,6 +20,8 @@
     }
 
     static function initialize () {
+      static::$jsonPath = getAbsDir("JSON") . "lang/";
+
       $lang = $_GET['lang'] ?? $_COOKIE['lang'] ?? substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
       if (!static::exists($lang)) $lang = static::defaultLang();
       static::$lang = $lang;
@@ -38,7 +40,7 @@
     static function getLangSwitchInfo () {
       $newLang = (static::$lang === "en") ? "de" : "en";
       $language = ($newLang === "en") ? "English" : "Deutsch";
-      $url = ROOT_DIR."/$newLang";
+      $url = HTML_ROOT . "$newLang";
       return array("lang" => $language, "url" => $url);
     }
 

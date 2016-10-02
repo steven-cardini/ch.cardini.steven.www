@@ -2,7 +2,7 @@
 class PhotoAlbumCatalog {
 
   private static $instance;
-  private static $json = JSON_DIR."photo/albums.json";
+  private static $json; // initialized in getInstance-method below
 
   private $albums;
   private $albumsAreLoaded;
@@ -19,6 +19,7 @@ class PhotoAlbumCatalog {
 
   public static function getInstance () {
     if (static::$instance === null) {
+      static::$json = getAbsDir("JSON") . "photo/albums.json";
       static::$instance = new PhotoAlbumCatalog();
     }
     return static::$instance;
