@@ -38,7 +38,7 @@
     <link href="<?php echo absPath("CSS", true); ?>style.css" rel="stylesheet">
 
     <!-- ReCaptcha JavaScript -->
-    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <script src='https://www.google.com/recaptcha/api.js?hl=<?php echo I18n::getLang(); ?>'></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -234,9 +234,8 @@
                                     <input type="email" class="form-control" placeholder="<?php echo I18n::t("form.email.label"); ?>" id="email" required data-validation-required-message="<?php echo I18n::t("form.email.required"); ?>">
                                     <p class="help-block text-danger"></p>
                                 </div>
-                                <!-- TODO http://stackoverflow.com/questions/30647113/not-a-robot-recaptcha-without-a-form-but-ajax-instead -->
                                 <div class="form-group">
-                                    <div class="g-recaptcha" data-callback="recaptchaCallback" data-sitekey="6LcWJQgUAAAAAMVkati57u7CoHsdUooBFrqXBZgv"></div>
+                                    <div class="g-recaptcha" data-sitekey="6LcWJQgUAAAAAMVkati57u7CoHsdUooBFrqXBZgv"></div>
                                 </div>
                             </div>
                             <div class="clearfix"></div>
