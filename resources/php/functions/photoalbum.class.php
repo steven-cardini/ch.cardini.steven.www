@@ -11,6 +11,7 @@ class PhotoAlbum implements JsonSerializable {
   private $json;
   private $photoFolder;
   private $thumbnailFolder;
+  private $frontFolder; // folder for front photos
 
   private $photos;
   private $photosAreLoaded;
@@ -45,6 +46,15 @@ class PhotoAlbum implements JsonSerializable {
     );
     if (!is_dir($this->thumbnailFolder['php'])) {
       $this->initializeDir($this->thumbnailFolder['php']);
+    }
+
+    // initialize front photos folder
+    $this->frontFolder = array (
+      "html" => absPath("IMG", true) . "albums/$this->id/front/",
+      "php" => absPath("IMG") . "albums/$this->id/front/"
+    );
+    if (!is_dir($this->frontFolder['php'])) {
+      $this->initializeDir($this->frontFolder['php']);
     }
 
     // load photos only when required
@@ -91,6 +101,11 @@ class PhotoAlbum implements JsonSerializable {
   public function getThumbnailFolder($html=false) {
     if ($html) return $this->thumbnailFolder['html'];
     else return $this->thumbnailFolder['php'];
+  }
+
+  public function getFrontFolder($html=false) {
+    if ($html) return $this->frontFolder['html'];
+    else return $this->frontFolder['php'];
   }
 
   public function getPhotos () {

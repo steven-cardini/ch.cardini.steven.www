@@ -29,6 +29,7 @@
       $total = count($_FILES['photos']['name']);
       $photoPath = $album->getPhotoFolder();
       $thumbnailPath = $album->getThumbnailFolder();
+      $frontPath = $album->getFrontFolder(); // folder with front photos
 
       for ($i=0; $i<$total; $i++) {     
         $fileName = $_FILES["photos"]["name"][$i];
@@ -56,14 +57,15 @@
         }
         
         $uploaded = move_uploaded_file ($tmpFilePath, $photoPath.$fileName);     
-        $resized  = Photo::copyResized ($photoPath.$fileName, $thumbnailPath.$fileName, 150, 150);
+        $thumbnail  = Photo::copyResized ($photoPath.$fileName, $thumbnailPath.$fileName, 150, 150);
+        $front = Photo::copyResized ($photoPath.$fileName, $frontPath.$fileName, 400, 290);
 
         if (!$uploaded) {
           MessageHandler::printError("$fileName could not be moved to photo folder.");
           continue;
         }
 
-        if (!$resized) {
+        if (!$thumbnail) {
           MessageHandler::printError("Thumbnail for $fileName could not be created.");
           continue;
         }

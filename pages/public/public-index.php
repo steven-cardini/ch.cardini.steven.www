@@ -113,7 +113,7 @@
                         $item = '<div class="col-md-4 col-sm-6 photo-item">
                                 <a href="#photos-'.$photoAlbum->getId().'" class="photo-link" data-toggle="modal">';
                       if (!empty($photoAlbum->getFrontPhoto())) {
-                        $item .= '<img src="'.$photoAlbum->getPhotoFolder(true).$photoAlbum->getFrontPhoto().'" class="img-responsive" alt="">';
+                        $item .= '<img src="'.$photoAlbum->getFrontFolder(true).$photoAlbum->getFrontPhoto().'" class="img-responsive" alt="">';
                       } else {
                         $item .= '<img src="'.absPath("IMG", true).'portfolio/roundicons.png" class="img-responsive" alt="">';
                       }
