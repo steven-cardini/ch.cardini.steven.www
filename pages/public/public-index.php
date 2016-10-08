@@ -94,13 +94,13 @@
         </div>
     </header>
 
-    <!-- Photo Grid Section -->
+    <!-- Photos Section -->
     <section id="photos" class="bg-light-gray">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading"><?php echo I18n::t("menu.photos"); ?></h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h3 class="section-subheading text-muted"><?php echo I18n::t("photos.subtitle"); ?></h3>
                 </div>
             </div>
             <div class="row">
@@ -115,7 +115,7 @@
                       if (!empty($photoAlbum->getFrontPhoto())) {
                         $item .= '<img src="'.$photoAlbum->getPhotoFolder(true).$photoAlbum->getFrontPhoto().'" class="img-responsive" alt="">';
                       } else {
-                        $item .= '<img src="resources/img/portfolio/roundicons.png" class="img-responsive" alt="">';
+                        $item .= '<img src="'.absPath("IMG", true).'portfolio/roundicons.png" class="img-responsive" alt="">';
                       }
                       $item .= '</a>
                                 <div class="photo-caption">
@@ -136,6 +136,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
+                    <a class="page-scroll" href="#contact" title="<?php echo I18n::t("menu.contact"); ?>"><i class="fa fa-envelope-square fa-3x" aria-hidden="true"></i></a>
+                    <a href="https://www.linkedin.com/in/steven-cardini-57999739" target="_blank" title="Linked-in"><i class="fa fa-linkedin-square fa-3x" aria-hidden="true"></i></a>
+                    <a href="https://www.xing.com/profile/Steven_Cardini" target="_blank" title="Xing"><i class="fa fa-xing-square fa-3x" aria-hidden="true"></i></a>
+                    <a href="https://www.github.com/stoeffu" target="_blank" title="GitHub"><i class="fa fa-github-square fa-3x" aria-hidden="true"></i></a>
                     <h2 class="section-heading"><?php echo I18n::t("menu.about"); ?></h2>
                     <h3 class="section-subheading text-muted"><?php echo I18n::t("about.subtitle"); ?></h3>
                 </div>
@@ -145,11 +149,11 @@
                     <ul class="timeline">
                         <li>
                             <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="resources/img/about/dna-163466_200.jpg" alt="">
+                                <img class="img-circle img-responsive" src="<?php echo absPath("IMG", true); ?>about/dna-163466_200.jpg" alt="">
                             </div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
-                                    <h4>2007-2010</h4>
+                                    <h4>2007 - 2010</h4>
                                     <h4 class="subheading"><?php echo I18n::t("about.item1.title"); ?></h4>
                                 </div>
                                 <div class="timeline-body">
@@ -159,25 +163,26 @@
                         </li>
                         <li class="timeline-inverted">
                             <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="resources/img/about/bacteria-67659_200.jpg" alt="">
+                                <img class="img-circle img-responsive" src="<?php echo absPath("IMG", true); ?>about/bacteria-67659_200.jpg" alt="">
                             </div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
-                                    <h4>2010-2012</h4>
+                                    <h4>2010 - 2012</h4>
                                     <h4 class="subheading"><?php echo I18n::t("about.item2.title"); ?></h4>
                                 </div>
                                 <div class="timeline-body">
                                     <p class="text-muted"><?php echo I18n::t("about.item2.description"); ?></p>
+                                    <p class="text-muted"><a href="<?php echo absPath("RES", true); ?>doc/20120312_master-thesis.pdf" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i>&nbsp;<?php echo I18n::t("about.item2.link"); ?></a></p>
                                 </div>
                             </div>
                         </li>
                         <li>
                             <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="resources/img/about/3.jpg" alt="">
+                                <img class="img-circle img-responsive" src="<?php echo absPath("IMG", true); ?>about/3.jpg" alt="">
                             </div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
-                                    <h4>Since 2012</h4>
+                                    <h4>2012 -</h4>
                                     <h4 class="subheading"><?php echo I18n::t("about.item3.title"); ?></h4>
                                 </div>
                                 <div class="timeline-body">
@@ -187,15 +192,16 @@
                         </li>
                         <li class="timeline-inverted">
                             <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="resources/img/about/matrix-356024_200.jpg" alt="">
+                                <img class="img-circle img-responsive" src="<?php echo absPath("IMG", true); ?>about/matrix-356024_200.jpg" alt="">
                             </div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
-                                    <h4>2013-2017</h4>
+                                    <h4>2013 - 2018</h4>
                                     <h4 class="subheading"><?php echo I18n::t("about.item4.title"); ?></h4>
                                 </div>
                                 <div class="timeline-body">
                                     <p class="text-muted"><?php echo I18n::t("about.item4.description"); ?></p>
+                                    <p class="text-muted"><a href="https://www.github.com/stoeffu" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i>&nbsp;<?php echo I18n::t("about.item4.link"); ?></a></p>
                                 </div>
                             </div>
                         </li>
@@ -212,7 +218,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading"><?php echo I18n::t("menu.contact"); ?></h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h3 class="section-subheading text-muted"><?php echo I18n::t("contact.subtitle"); ?></h3>
                 </div>
             </div>
             <div class="row">

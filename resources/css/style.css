@@ -32,6 +32,22 @@ div.thumbnail-table div {
   width: 100%;
 }
 
+a > .fa.fa-3x {
+  color: #000; 
+	opacity: 0.6;
+  margin: 15px 10px 20px 0;
+}
+
+a > .fa.fa-3x:hover {
+	color: #069;  
+  opacity: 1;
+  transition: all 0.3s ease-in-out;  
+}
+
+li.timeline-inverted > a:hover {
+  border: 1px solid #000;
+}
+
 div.galleria div.galleria-info {
   display: block;
   position: absolute;
