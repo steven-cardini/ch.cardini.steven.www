@@ -15,6 +15,7 @@
     <meta name="author" content="">
 
     <title>Steven Cardini - Administration</title>
+    <link rel="shortcut icon" type="image/ico" href="<?php echo HTML_ROOT; ?>favicon.ico" />
 
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo absPath("RES", true); ?>vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
