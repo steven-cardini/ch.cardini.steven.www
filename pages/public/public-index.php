@@ -90,7 +90,6 @@
         <div class="container">
             <div class="intro-text">
                 <div class="intro-lead-in"><?php echo I18n::t("intro.title"); ?></div>
-                <div class="intro-heading"><?php echo I18n::t("intro.text"); ?></div>
             </div>
         </div>
     </header>
