@@ -222,7 +222,8 @@
                     <h3 class="section-subheading text-muted"><?php echo I18n::t("contact.subtitle"); ?></h3>
                 </div>
             </div>
-            <div class="row">
+            <div id="success"></div>
+            <div class="row" id="contact-container">
                 <div class="col-lg-12">
                     <form name="sentMessage" id="contactForm" novalidate>
                         <div class="row">
@@ -247,7 +248,6 @@
                             </div>
                             <div class="clearfix"></div>
                             <div class="col-lg-12 text-center">
-                                <div id="success"></div>
                                 <button type="submit" class="btn btn-xl"><?php echo I18n::t("form.button.send"); ?></button>
                             </div>
                         </div>

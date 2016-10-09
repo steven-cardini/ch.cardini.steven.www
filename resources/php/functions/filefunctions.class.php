@@ -2,7 +2,7 @@
 
 class FileFunctions {
 
-  private static $logFile = PHP_ROOT . "output.log";
+  private static $logFile = PHP_ROOT . "resources/logs/general.log";
 
   // INPUT: parent directory inclusive trailing "/"
   static function getSubFolders ($rootDir) {
@@ -112,7 +112,7 @@ class FileFunctions {
   }
 
   protected static function logToFile ($file, $text) {
-    $text = date("Y-m-d H:i:s").' > '.$text."\r\n";
+    $text = date("Y-m-d H:i:s")." >\r\n$text\r\n";
     file_put_contents($file, $text, FILE_APPEND);
   }
 

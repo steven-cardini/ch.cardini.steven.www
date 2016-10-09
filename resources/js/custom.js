@@ -12,18 +12,26 @@ $(".switch-language").click(function () {
   }
 });
 
-function getError (key) {
-    if (lang === "de") {
+function getMessage (key) {
+    if (lang === "de") { // German messages
       switch (key) {
         case "email.invalid":
           return "Ungültige E-Mail-Adresse";
+        case "contactform.sent":
+          return "Vielen Dank für Deine Mitteilung!";
+        case "contactform.error":
+          return "Es tut mir leid, mein Mailserver antwortet gerade nicht. Bitte versuche es später nochmals!";
         default:
           return "Unbestimmbarer Fehler";
       }
-    } else {
+    } else { // English messages
       switch (key) {
         case "email.invalid":
           return "Not a valid email address";
+        case "contactform.sent":
+          return "Thanks for your message!";
+        case "contactform.error":
+          return "Sorry, it seems that my mail server is not responding. Please try again later!";
         default:
           return "Undefined Error";
       }
