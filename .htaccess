@@ -1,5 +1,5 @@
 DirectoryIndex index.php
-IndexIgnore * [L]
+Options -Indexes
 
 RewriteEngine on # Turn on the rewriting engine
 #RewriteCond %{REQUEST_FILENAME} !-f
