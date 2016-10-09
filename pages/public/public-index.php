@@ -70,10 +70,10 @@
                         <a href="#page-top"></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#photos"><?php echo I18n::t("menu.photos"); ?></a>
+                        <a class="page-scroll" href="#about"><?php echo I18n::t("menu.about"); ?></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#about"><?php echo I18n::t("menu.about"); ?></a>
+                        <a class="page-scroll" href="#photos"><?php echo I18n::t("menu.photos"); ?></a>
                     </li>
                     <li>
                         <a class="page-scroll" href="#contact"><?php echo I18n::t("menu.contact"); ?></a>
@@ -93,43 +93,6 @@
             </div>
         </div>
     </header>
-
-    <!-- Photos Section -->
-    <section id="photos" class="bg-light-gray">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading"><?php echo I18n::t("menu.photos"); ?></h2>
-                    <h3 class="section-subheading text-muted"><?php echo I18n::t("photos.subtitle"); ?></h3>
-                </div>
-            </div>
-            <div class="row">
-                
-                <?php
-                    $albumCatalog = PhotoAlbumCatalog::getInstance();
-                    $photoAlbums = $albumCatalog->getAlbums();
-
-                    foreach ($photoAlbums as $photoAlbum) {
-                        $item = '<div class="col-md-4 col-sm-6 photo-item">
-                                <a href="#photos-'.$photoAlbum->getId().'" class="photo-link" data-toggle="modal">';
-                      if (!empty($photoAlbum->getFrontPhoto())) {
-                        $item .= '<img src="'.$photoAlbum->getFrontFolder(true).$photoAlbum->getFrontPhoto().'" class="img-responsive" alt="">';
-                      } else {
-                        $item .= '<img src="'.absPath("IMG", true).'portfolio/roundicons.png" class="img-responsive" alt="">';
-                      }
-                      $item .= '</a>
-                                <div class="photo-caption">
-                                    <h4>'.$photoAlbum->getTitle().'</h4>
-                                    <p class="text-muted">'.$photoAlbum->getCaption().'</p>
-                                </div>
-                              </div>';
-                        echo $item;
-                    }
-                ?>
-            
-            </div>
-        </div>
-    </section>
 
     <!-- About Section -->
     <section id="about">
@@ -211,6 +174,42 @@
         </div>
     </section>
 
+    <!-- Photos Section -->
+    <section id="photos" class="bg-light-gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading"><?php echo I18n::t("menu.photos"); ?></h2>
+                    <h3 class="section-subheading text-muted"><?php echo I18n::t("photos.subtitle"); ?></h3>
+                </div>
+            </div>
+            <div class="row">
+                
+                <?php
+                    $albumCatalog = PhotoAlbumCatalog::getInstance();
+                    $photoAlbums = $albumCatalog->getAlbums();
+
+                    foreach ($photoAlbums as $photoAlbum) {
+                        $item = '<div class="col-md-4 col-sm-6 photo-item">
+                                <a href="#photos-'.$photoAlbum->getId().'" class="photo-link" data-toggle="modal">';
+                      if (!empty($photoAlbum->getFrontPhoto())) {
+                        $item .= '<img src="'.$photoAlbum->getFrontFolder(true).$photoAlbum->getFrontPhoto().'" class="img-responsive" alt="">';
+                      } else {
+                        $item .= '<img src="'.absPath("IMG", true).'portfolio/roundicons.png" class="img-responsive" alt="">';
+                      }
+                      $item .= '</a>
+                                <div class="photo-caption">
+                                    <h4>'.$photoAlbum->getTitle().'</h4>
+                                    <p class="text-muted">'.$photoAlbum->getCaption().'</p>
+                                </div>
+                              </div>';
+                        echo $item;
+                    }
+                ?>
+            
+            </div>
+        </div>
+    </section>
 
     <!-- Contact Section -->
     <section id="contact">
