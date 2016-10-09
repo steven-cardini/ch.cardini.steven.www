@@ -11,6 +11,7 @@ Thumbs.db
 /bower_components
 /node_modules
 /doc/
+resources/doc/
 resources/json/
 resources/img/albums/
 resources/logs/
