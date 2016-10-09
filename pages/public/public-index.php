@@ -195,7 +195,7 @@
                       if (!empty($photoAlbum->getFrontPhoto())) {
                         $item .= '<img src="'.$photoAlbum->getFrontFolder(true).$photoAlbum->getFrontPhoto().'" class="img-responsive" alt="">';
                       } else {
-                        $item .= '<img src="'.absPath("IMG", true).'portfolio/roundicons.png" class="img-responsive" alt="">';
+                        $item .= '<img src="'.absPath("IMG", true).'albums/front.png" class="img-responsive" alt="">';
                       }
                       $item .= '</a>
                                 <div class="photo-caption">
