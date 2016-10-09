@@ -1,4 +1,7 @@
 DirectoryIndex index.php
+#Disable server signature
+ServerSignature Off
+#Disable index listing
 Options -Indexes
 
 RewriteEngine on # Turn on the rewriting engine
