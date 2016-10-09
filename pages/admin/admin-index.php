@@ -48,7 +48,7 @@
 
 <ul class="nav nav-pills"> 
   <li role="presentation" class="active">
-    <a href="admin.php">Home</a>
+    <a href="<?php echo HTML_ROOT."admin/"; ?>">Home</a>
   </li> 
   <li role="presentation" class="dropdown"> 
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Photos <span class="caret"></span> </a> 
