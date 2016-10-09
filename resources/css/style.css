@@ -48,6 +48,10 @@ li.timeline-inverted > a:hover {
   border: 1px solid #000;
 }
 
+section#contact .section-subheading {
+  color: #ccc;
+}
+
 div.galleria div.galleria-info {
   display: block;
   position: absolute;

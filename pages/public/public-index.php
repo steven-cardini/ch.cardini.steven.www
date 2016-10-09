@@ -256,6 +256,7 @@
         </div>
     </section>
 
+    <!-- Footer Section -->
     <footer>
         <div class="container">
             <div class="row">
@@ -264,12 +265,12 @@
                 </div>
                 <div class="col-md-4">
                     <ul class="list-inline social-buttons">
-                        <li><a href="#"><i class="fa fa-twitter"></i></a>
+                        <li><a href="https://www.linkedin.com/in/steven-cardini-57999739" target="_blank" title="Linked-in"><i class="fa fa-linkedin"></i></a>
                         </li>
-                        <li><a href="#"><i class="fa fa-facebook"></i></a>
+                        <li><a href="https://www.xing.com/profile/Steven_Cardini" target="_blank" title="Xing"><i class="fa fa-xing"></i></a>
                         </li>
-                        <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                        </li>
+                        <li><a href="https://www.github.com/stoeffu" target="_blank" title="GitHub"><i class="fa fa-github"></i></a>
+                        </li>                    
                     </ul>
                 </div>
                 <div class="col-md-4">
