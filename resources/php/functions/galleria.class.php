@@ -20,7 +20,7 @@ class Galleria {
       "de" => $album->getId() . '-de.json'
     );
     $this->index = -1;
-    $this->loadMediaFromAlbum ($album->getPhotos(), $album->getPhotoFolder(true), $album->getThumbnailFolder(true));
+    $this->loadMediaFromAlbum ($album->getPhotos(), $album->getId());
   }
 
   public function persist () {
@@ -44,11 +44,11 @@ class Galleria {
     }
   }
 
-  private function loadMediaFromAlbum($photoArray, $photoFolder, $thumbnailFolder) {
+  private function loadMediaFromAlbum($photoArray, $albumId) {
     foreach ($photoArray as $photo) {
       $i = $this->nextIndex();
-      $this->media["en"][$i]['image'] = $this->media["de"][$i]['image'] = $photoFolder . $photo->getFileName();
-      $this->media["en"][$i]['thumb'] = $this->media["de"][$i]['thumb'] = $thumbnailFolder . $photo->getFileName();
+      $this->media["en"][$i]['image'] = $this->media["de"][$i]['image'] = "resources/img/albums/$albumId/" . $photo->getFileName();
+      $this->media["en"][$i]['thumb'] = $this->media["de"][$i]['thumb'] = "resources/img/albums/$albumId/thumbs/" . $photo->getFileName();
       // TODO: $this->media[$i]['big'] = ;
 
       // add English titles and captions
