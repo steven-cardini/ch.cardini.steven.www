@@ -220,6 +220,8 @@
                     <h3 class="section-subheading text-muted"><?php echo I18n::t("contact.subtitle"); ?></h3>
                 </div>
             </div>
+            
+
             <div id="success"></div>
             <div class="row" id="contact-container">
                 <div class="col-lg-12">
@@ -246,7 +248,12 @@
                             </div>
                             <div class="clearfix"></div>
                             <div class="col-lg-12 text-center">
-                                <button type="submit" class="btn btn-xl"><?php echo I18n::t("form.button.send"); ?></button>
+                                <button type="submit" class="btn btn-xl"><?php echo I18n::t("form.button.send"); ?>&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></button>
+                            </div>
+                            <div id="pgp" class="col-lg-12 text-center">
+                              <a href="#pgp-key" data-toggle="modal">'
+                              <button type="button" class="btn btn-xl btn-default"><?php echo I18n::t("pgp.title"); ?>&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-lock" aria-hidden="true"></span></button>
+                              </a>
                             </div>
                         </div>
                     </form>
@@ -304,6 +311,26 @@
             echo $item;
         }
     ?>
+
+    <!-- PGP Modal -->
+
+    <div id="pgp-key" class="modal fade" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title"><?php echo I18n::t("pgp.title"); ?></h4>
+          </div>
+          <div class="modal-body">
+            <p><?php echo I18n::t("pgp.text"); ?></p>
+            <p id ="pgp-key-value" onclick="selectText('pgp-key-value');"><?php echo pgp_puk; ?></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo I18n::t("buttons.close"); ?></button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- Impressum Modal -->
 
