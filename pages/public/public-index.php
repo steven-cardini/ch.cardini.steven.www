@@ -16,10 +16,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
+    <meta name="description" content="<?php echo I18n::t("meta.description"); ?>">
     <meta name="author" content="Steven Cardini">
+    <meta name="robots" content="noimageindex">
 
-    <title>Steven Cardini</title>
+    <title><?php echo I18n::t("html.title"); ?></title>
     <link rel="shortcut icon" type="image/ico" href="<?php echo HTML_ROOT; ?>favicon.ico" />
 
     <!-- Bootstrap Core CSS -->
