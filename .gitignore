@@ -10,6 +10,7 @@ Thumbs.db
 *.private.php
 /bower_components
 /node_modules
+/cron/
 /doc/
 resources/doc/
 resources/json/

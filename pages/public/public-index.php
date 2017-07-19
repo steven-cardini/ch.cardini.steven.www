@@ -323,7 +323,8 @@
             <h4 class="modal-title"><?php echo I18n::t("pgp.title"); ?></h4>
           </div>
           <div class="modal-body">
-            <p><?php echo I18n::t("pgp.text"); ?></p>
+            <p><?php echo I18n::t("pgp.text.key") ?></p>
+            <p><?php echo I18n::t("pgp.text.fingerprint").pgp_fingerprint; ?></p>
             <p id ="pgp-key-value" onclick="selectText('pgp-key-value');"><?php echo pgp_puk; ?></p>
           </div>
           <div class="modal-footer">
