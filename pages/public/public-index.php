@@ -136,17 +136,17 @@
                                 </div>
                                 <div class="timeline-body">
                                     <p class="text-muted"><?php echo I18n::t("about.item2.description"); ?></p>
-                                    <p class="text-muted"><a href="<?php echo absPath("RES", true); ?>doc/20120312_master-thesis.pdf" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i>&nbsp;<?php echo I18n::t("about.item2.link"); ?></a></p>
+                                    <p class="text-muted"><a href="<?php echo absPath("RES", true); ?>doc/20120312_cardini-steven_master-thesis.pdf" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i>&nbsp;<?php echo I18n::t("about.item2.link"); ?></a></p>
                                 </div>
                             </div>
                         </li>
                         <li>
                             <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="<?php echo absPath("IMG", true); ?>about/3.jpg" alt="">
+                                <img class="img-circle img-responsive" src="<?php echo absPath("IMG", true); ?>about/flag-1192646_640.jpg" alt="">
                             </div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
-                                    <h4>2012 -</h4>
+                                    <h4>2012 - 2017</h4>
                                     <h4 class="subheading"><?php echo I18n::t("about.item3.title"); ?></h4>
                                 </div>
                                 <div class="timeline-body">
@@ -156,16 +156,31 @@
                         </li>
                         <li class="timeline-inverted">
                             <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="<?php echo absPath("IMG", true); ?>about/matrix-356024_200.jpg" alt="">
+                                <img class="img-circle img-responsive" src="<?php echo absPath("IMG", true); ?>about/3.jpg" alt="">
                             </div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
-                                    <h4>2013 - 2018</h4>
+                                    <h4>2013 - 2017</h4>
                                     <h4 class="subheading"><?php echo I18n::t("about.item4.title"); ?></h4>
                                 </div>
                                 <div class="timeline-body">
                                     <p class="text-muted"><?php echo I18n::t("about.item4.description"); ?></p>
-                                    <p class="text-muted"><a href="https://www.github.com/stoeffu" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i>&nbsp;<?php echo I18n::t("about.item4.link"); ?></a></p>
+                                    <p class="text-muted"><a href="<?php echo absPath("RES", true); ?>doc/20180118_cardini-steven_bachelor-thesis.pdf" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i>&nbsp;<?php echo I18n::t("about.item4.link"); ?></a></p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="timeline-image">
+                                <img class="img-circle img-responsive" src="<?php echo absPath("IMG", true); ?>about/matrix-356024_200.jpg" alt="">
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4>2018</h4>
+                                    <h4 class="subheading"><?php echo I18n::t("about.item5.title"); ?></h4>
+                                </div>
+                                <div class="timeline-body">
+                                    <p class="text-muted"><?php echo I18n::t("about.item5.description"); ?></p>
+                                    <p class="text-muted"><a href="https://www.github.com/stoeffu" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i>&nbsp;<?php echo I18n::t("about.item5.link"); ?></a></p>
                                 </div>
                             </div>
                         </li>
